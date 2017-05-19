@@ -1,0 +1,17 @@
+ruby:
+  flashes = flash.to_hash.transform_keys do |key|
+    case key = key.to_sym
+    when :notice
+      :info
+    when :alert
+      :danger
+    else
+      key
+    end
+  end
+
+- flashes.each do |key, value|
+  div.alert-dismissible.fade.show class=("alert alert-#{key}") role="alert"
+    button.close aria-label="Close" data-dismiss="alert" type="button"
+      span aria-hidden="true" &times;
+    = value
