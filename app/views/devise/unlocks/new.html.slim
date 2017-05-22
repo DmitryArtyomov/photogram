@@ -1,0 +1,15 @@
+= bootstrap_devise_error_messages!
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = t('.resend_unlock_instructions', default: 'Resend unlock instructions')
+    .card-block
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, html: { role: 'form' } }) do |f|
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, class: 'form-control'
+        .form-group
+          = f.submit t('.resend_unlock_instructions', default: 'Resend unlock instructions'), class: 'btn btn-primary'
+    .card-footer
+      = render 'devise/shared/links'
