@@ -1,0 +1,6 @@
+- avatar = @user.avatar ? @user.avatar.url : image_url('noavatar.png')
+.row
+  .col-sm-4.text-center
+    .avatar-col
+      = content_tag(:div, '', class: "avatar", style: "background-image: url('#{avatar}');")
+  .col-sm-8
