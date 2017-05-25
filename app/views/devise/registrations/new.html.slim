@@ -1,0 +1,23 @@
+= bootstrap_devise_error_messages!
+.row
+  .col-sm-8.offset-sm-2
+    .card
+      h2.card-header
+        = t('.sign_up', default: 'Sign up')
+      .card-block
+        = simple_form_for(@user, url: user_registration_path, html: { role: 'form' }) do |f|
+          .row
+            .col-sm-6
+              = f.input :email, autofocus: true, required: true
+              = f.input :password, required: true
+              = f.input :password_confirmation, required: true
+            .col-sm-6
+              = f.input :first_name, autofocus: true, required: true
+              = f.input :last_name, required: true
+              = f.input :address, required: false
+            .col-sm-12
+              = f.input :avatar, input_html: { class: 'form-control' }, required: false
+          .text-center
+            = f.button :submit, 'Register', class: 'btn btn-primary'
+      .card-footer
+        = render 'devise/shared/links'

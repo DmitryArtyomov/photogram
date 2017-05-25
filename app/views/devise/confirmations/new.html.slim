@@ -1,0 +1,15 @@
+= bootstrap_devise_error_messages!
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = t('.resend_confirmation_instructions', default: 'Resend confirmation instructions')
+      .card-block
+        = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f|
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: "form-control"
+          .form-group
+            = f.submit t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'), class: 'btn btn-primary'
+      .card-footer
+        = render 'devise/shared/links'

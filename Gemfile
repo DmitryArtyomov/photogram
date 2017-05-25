@@ -43,7 +43,7 @@ gem 'devise-bootstrap-views', :git => 'https://github.com/mperrando/devise-boots
 gem 'cancancan'
 gem 'fog-aws'
 gem 'carrierwave'
-
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

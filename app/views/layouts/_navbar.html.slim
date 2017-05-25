@@ -1,0 +1,21 @@
+nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary.mb-4
+  .container
+    button.navbar-toggler.navbar-toggler-right aria-controls="navbarNavDropdown" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNavDropdown" data-toggle="collapse" type="button"
+      span.navbar-toggler-icon
+    a.navbar-brand href="/"  PhotoGram
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        - if user_signed_in?
+          li.nav-item.dropdown
+            = link_to(user_path(current_user), class: "navbarDropdownMenuLink nav-link dropdown-toggle",
+              id: "navbarDropdownMenuLink", "aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown") do
+              = current_user.first_name
+            .dropdown-menu aria-labelledby="navbarDropdownMenuLink"
+              = link_to('My profile', user_path(current_user), class: "dropdown-item")
+              .dropdown-divider
+              = link_to('Profile settings', edit_user_path(current_user), class: "dropdown-item")
+              = link_to('Account settings', edit_user_registration_path, class: "dropdown-item")
+              .dropdown-divider
+              = link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item")
+        - else
+          = link_to('Login', new_user_session_path, class: "nav-link")

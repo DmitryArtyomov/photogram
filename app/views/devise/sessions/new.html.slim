@@ -1,0 +1,23 @@
+= bootstrap_devise_error_messages!
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = t('.sign_in', default: 'Sign in')
+      .card-block
+        = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: 'form-control'
+          .form-group
+            = f.label :password
+            = f.password_field :password, autocomplete: 'off', class: 'form-control'
+          - if devise_mapping.rememberable?
+            .form-check
+              = f.label :remember_me, class: 'form-check-label' do
+                = f.check_box :remember_me, class: 'form-check-input'
+                = t('activerecord.attributes.user.remember_me', default: 'Remember me')
+          .form-group
+            = f.submit  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
+      .card-footer
+        = render 'devise/shared/links'
