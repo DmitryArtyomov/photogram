@@ -3,4 +3,5 @@
 #= require tether
 #= require bootstrap-sprockets
 #= require turbolinks
-#= require_tree .
+#= require select2
+#= require tags_selectors
