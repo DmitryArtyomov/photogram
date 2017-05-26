@@ -1,3 +1,6 @@
 .row
   .col-sm-4
-    select.tags-select.w-100 multiple="multiple"
+    = select_tag(:tags, nil, class: 'tags-select w-100', multiple: true)
+  .col-sm-4
+    - @all_tags.each do |tag|
+      div = tag.text

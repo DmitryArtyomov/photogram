@@ -1,13 +1,16 @@
 $(document).on 'turbolinks:load', ->
   return unless $('.tags-select').length
-  $('.tags-select').select2
+  window.select2 = $('.tags-select').select2
     theme: 'bootstrap'
     tags: true
+    allowClear: true
+    placeholder: 'Enter your tags...'
     tokenSeparators: [',', ' ', '_']
     ajax:
       url: '/tags'
       delay: 250
       processResults: (data, params) ->
+        term = $.trim(params.term)
         results: data
       cache: true
     createTag: (params) ->
@@ -21,3 +24,7 @@ $(document).on 'turbolinks:load', ->
         id: term
         text: term
       }
+    insertTag: (data, tag) ->
+      data.unshift tag unless data.filter((el) ->
+        tag.text == el.text
+      ).length
