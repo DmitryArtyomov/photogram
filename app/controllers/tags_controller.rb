@@ -1,7 +1,5 @@
 class TagsController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
+  def search
     @all_tags = Tag.all
     @tags = Tag.search_by_text(params[:q]).limit(20)
     respond_to do |format|

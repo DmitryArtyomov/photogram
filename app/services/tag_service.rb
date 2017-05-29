@@ -4,14 +4,12 @@ class TagService
   end
 
   def tags
-    result = []
-    incoming_tags.each do |tag_text|
+    incoming_tags.map do |tag_text|
       unless tag = Tag.find_by(text: tag_text)
         tag = Tag.create(text: tag_text)
       end
-      result.push(tag)
+      tag
     end
-    result
   end
 
   private
