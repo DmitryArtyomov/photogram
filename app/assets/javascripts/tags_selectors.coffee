@@ -7,7 +7,7 @@ $(document).on 'turbolinks:load', ->
     placeholder: 'Enter your tags...'
     tokenSeparators: [',', ' ', '_']
     ajax:
-      url: '/tags'
+      url: '/tags/search'
       delay: 250
       processResults: (data, params) ->
         term = $.trim(params.term)
