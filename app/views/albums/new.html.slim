@@ -1,0 +1,11 @@
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = 'Create album'
+      .card-block
+        = simple_form_for(@album, url: user_albums_path) do |f|
+          = f.input :name, autofocus: true, required: true, label: 'Title'
+          = f.input :description
+          .form-group.text-center
+            = f.button :submit, 'Create', class: 'btn btn-primary'
