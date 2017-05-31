@@ -1,18 +1,18 @@
 class TagService
   def initialize(tags)
     @incoming_tags = tags
+    @tag_format =
+      Tag.
+      validators.
+      find{ |validator| validator.instance_of? ActiveModel::Validations::FormatValidator }.
+      options[:with]
   end
 
   def tags
-    incoming_tags.map do |tag_text|
-      unless tag = Tag.find_by(text: tag_text)
-        tag = Tag.create(text: tag_text)
-      end
-      tag
-    end
+    incoming_tags.select {|tag| tag =~ tag_format }.map { |tag| Tag.find_or_create_by(text: tag) }
   end
 
   private
 
-  attr_reader :incoming_tags
+  attr_reader :incoming_tags, :tag_format
 end
