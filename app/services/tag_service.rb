@@ -1,10 +1,10 @@
 class TagService
   def initialize(tags)
-    @incoming_tags = tags
+    @incoming_tags = tags || []
     @tag_format =
       Tag.
       validators.
-      find{ |validator| validator.instance_of? ActiveModel::Validations::FormatValidator }.
+      find { |validator| validator.instance_of? ActiveModel::Validations::FormatValidator }.
       options[:with]
   end
 

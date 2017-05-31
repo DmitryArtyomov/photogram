@@ -24,6 +24,13 @@ class AlbumsController < ApplicationController
   end
 
   def update
+    if @album.update_attributes(album_params)
+      flash[:success] = "Album was successfully updated"
+      redirect_to user_album_path(@user, @album)
+    else
+      flash[:alert] = "Error updating album"
+      render "edit"
+    end
   end
 
   def remove
@@ -32,6 +39,9 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:album).permit(:name, :description)
+    permitted_params = params.require(:album).permit(:name, :description, tags: [])
+    permitted_params[:tags] = TagService.new(permitted_params[:tags]).tags
+    p permitted_params
+    permitted_params
   end
 end

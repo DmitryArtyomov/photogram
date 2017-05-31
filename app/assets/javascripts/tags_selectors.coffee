@@ -1,5 +1,9 @@
+$(document).on 'turbolinks:before-cache', ->
+  $('.tags-select').select2 'destroy'
+
 $(document).on 'turbolinks:load', ->
   return unless $('.tags-select').length
+  $('.tags-select').empty()
   window.select2 = $('.tags-select').select2
     theme: 'bootstrap'
     tags: true
@@ -10,8 +14,9 @@ $(document).on 'turbolinks:load', ->
       url: '/tags/search'
       delay: 250
       processResults: (data, params) ->
-        term = $.trim(params.term)
-        results: data
+        results: data.map (el) ->
+          el['id'] = el.text
+          el
       cache: true
     createTag: (params) ->
       term = $.trim(params.term)

@@ -21,3 +21,12 @@
       .follow-block
         - if user_signed_in?
           = button_to('Follow', '#', method: :get, class: 'btn btn-primary')
+
+.profile-albums
+  .row
+    h3 Albums:
+  .row
+    - @albums.each do |album|
+      div
+        div = album.name
+        div = album.description
