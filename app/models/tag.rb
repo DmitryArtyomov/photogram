@@ -15,7 +15,7 @@
 class Tag < ApplicationRecord
   include PgSearch
 
-  validates :text, presence: true, length: { in: 2..20 }, uniqueness: true, format: { with: /\A#[\da-zA-Zа-яА-ЯёЁ]+\z/,
+  validates :text, uniqueness: true, format: { with: /\A#[\da-zA-Zа-яА-ЯёЁ]{1,20}\z/,
     message: 'wrong tag format' }
 
   pg_search_scope :search_by_text, against: :text, using: { tsearch: { prefix: true} }
