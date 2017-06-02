@@ -3,7 +3,7 @@
     .row
       .col-sm-4.text-center
         .avatar-col
-          = content_tag(:div, '', class: "avatar", style: "background-image: url('#{avatar}');")
+          = image_tag(avatar, class: "avatar img-fluid")
       .col-sm-8.profile-info
         h3.profile-name = link_to("#{@user.first_name} #{@user.last_name}", @user)
         .row.profile-counters
@@ -11,8 +11,8 @@
             b = @user.albums.size
             = ' album'.pluralize(@user.albums.size)
           .col-3
-            b 103
-            |  photos
+            b = @user.photos.size
+            = ' photo'.pluralize(@user.photos.size)
           .col-3
             = link_to('#') do
               b 248

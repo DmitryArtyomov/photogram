@@ -21,4 +21,5 @@ class Tag < ApplicationRecord
   pg_search_scope :search_by_text, against: :text, using: { tsearch: { prefix: true} }
 
   has_and_belongs_to_many :albums
+  has_and_belongs_to_many :photos
 end

@@ -6,7 +6,16 @@
       - @albums.each do |album|
         .col-3
           .card.mb-5 = link_to user_album_path(@user, album)
-            = image_tag('http://via.placeholder.com/600x600', class: 'card-img-top img-fluid')
+            .album-preview
+              - photo_urls = album.photos.sample(3).map { |photo| photo.image.thumb.url }
+              - if photo_urls.size.in?(2..3)
+                - (4 - photo_urls.size).times { photo_urls.push(image_url 'nophoto.png') }
+              - elsif photo_urls.empty?
+                - photo_urls.push(image_url 'nophoto.png')
+              - photo_urls.each do |url|
+                div class=("collage-item-#{photo_urls.size > 1 ? 4 : 1}")
+                  = image_tag(url, class: 'img-fluid')
+
             .card-footer.text-center
               .card-text = album.name
       - if can? :create_nested_resource, @user

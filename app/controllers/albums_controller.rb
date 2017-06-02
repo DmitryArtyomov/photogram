@@ -18,6 +18,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @photos = @album.photos.order(created_at: :desc)
   end
 
   def edit
