@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525095617) do
+ActiveRecord::Schema.define(version: 20170531102035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "is_main",     default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["user_id"], name: "index_albums_on_user_id", using: :btree
+  end
+
+  create_table "albums_tags", id: false, force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "tag_id",   null: false
+    t.index ["album_id", "tag_id"], name: "index_albums_tags_on_album_id_and_tag_id", using: :btree
+    t.index ["tag_id", "album_id"], name: "index_albums_tags_on_tag_id_and_album_id", using: :btree
+  end
 
   create_table "tags", force: :cascade do |t|
     t.string   "text",       limit: 20
@@ -44,4 +61,5 @@ ActiveRecord::Schema.define(version: 20170525095617) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "albums", "users", on_delete: :cascade
 end

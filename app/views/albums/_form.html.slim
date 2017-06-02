@@ -1,0 +1,9 @@
+- tags ||= []
+
+= simple_form_for(album, url: path) do |f|
+  = f.input :name, autofocus: true, required: true, label: 'Title'
+  = f.input :description
+  = f.input :tags, as: :select, input_html: { class: 'tags-select', multiple: true, data: { tags: tags, width: '100%' }},
+    collection: [], include_blank: false, include_hidden: false
+  .text-center
+    = f.button :submit, btn_text, class: 'btn btn-primary'

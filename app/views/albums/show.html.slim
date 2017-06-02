@@ -1,0 +1,21 @@
+.profile-block
+  = render 'users/profile_head'
+
+.row.mb-4
+  .col-12.text-center
+    h2
+      = @album.name
+      - if can?(:edit, @album)
+        = link_to edit_user_album_path(@user, @album) do
+          = fa_icon 'pencil', class: 'pl-3'
+    .text-muted = @album.description
+    .tags-block
+      - @album.tags.each do |tag|
+        = link_to('#') do
+          span.tag = tag.text
+
+.row
+  - 15.times do
+    .col-6.col-md-4.col-lg-3
+      .photo-preview.mb-4
+        = image_tag('http://via.placeholder.com/600x600', class: 'img-fluid rounded')

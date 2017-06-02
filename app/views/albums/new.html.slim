@@ -1,0 +1,9 @@
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = 'Create album'
+      .card-block
+        = render 'form', album: @album, path: user_albums_path, btn_text: 'Create'
+      .card-footer
+        = link_to t('.back', default: 'Back'), :back

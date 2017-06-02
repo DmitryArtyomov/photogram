@@ -34,4 +34,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   mount_uploader :avatar, AvatarUploader
+
+  has_many :albums
 end

@@ -19,4 +19,6 @@ class Tag < ApplicationRecord
     message: 'wrong tag format' }
 
   pg_search_scope :search_by_text, against: :text, using: { tsearch: { prefix: true} }
+
+  has_and_belongs_to_many :albums
 end
