@@ -4,10 +4,6 @@
       h2.card-header
         = 'Create album'
       .card-block
-        = simple_form_for(@album, url: user_albums_path) do |f|
-          = f.input :name, autofocus: true, required: true, label: 'Title'
-          = f.input :description
-          = f.input :tags, as: :select, input_html: { class: 'tags-select', multiple: true },
-            collection: [], include_blank: false, include_hidden: false
-          .form-group.text-center
-            = f.button :submit, 'Create', class: 'btn btn-primary'
+        = render 'form', album: @album, path: user_albums_path, btn_text: 'Create'
+      .card-footer
+        = link_to t('.back', default: 'Back'), :back

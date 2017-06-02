@@ -1,6 +1,17 @@
+.profile-block
+  a
+    color: inherit
+
 .profile-head
   .avatar-col
-    width: 50%
+    @include media-breakpoint-up(lg)
+      width: 50%
+    @include media-breakpoint-only(md)
+      width: 75%
+    @include media-breakpoint-down(sm)
+      width: 100%
+    @include media-breakpoint-only(xs)
+      width: 50%
     display: inline-block
     .avatar
       width: 100%
@@ -9,8 +20,6 @@
       background-position: center center
       background-size: cover
       border-radius: 50%
-  a
-    color: inherit
 
   .profile-info
     display: flex
@@ -18,8 +27,17 @@
     justify-content: space-between
     @extend .text-center
     .profile-name
-
+      a:link
+        text-decoration: none
     .profile-counters
-
+      @include media-breakpoint-only(xs)
+        margin-bottom: 1em
     .follow-block
       @extend .pb-2
+
+.tags-block
+  @extend .mt-2
+  .tag
+    @extend .mr-1, .badge, .badge-primary
+    font-size: 100%
+    margin-bottom: 0.25em

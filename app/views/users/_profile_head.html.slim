@@ -1,0 +1,26 @@
+- avatar = @user.avatar? ? @user.avatar.url : image_url('noavatar.png')
+.profile-head.mb-5
+    .row
+      .col-sm-4.text-center
+        .avatar-col
+          = content_tag(:div, '', class: "avatar", style: "background-image: url('#{avatar}');")
+      .col-sm-8.profile-info
+        h3.profile-name = link_to("#{@user.first_name} #{@user.last_name}", @user)
+        .row.profile-counters
+          .col-3
+            b = @user.albums.size
+            = ' album'.pluralize(@user.albums.size)
+          .col-3
+            b 103
+            |  photos
+          .col-3
+            = link_to('#') do
+              b 248
+              |  followers
+          .col-3
+            = link_to('#') do
+              b 228
+              |  following
+        .follow-block
+          - if user_signed_in?
+            = button_to('Follow', '#', method: :get, class: 'btn btn-primary')

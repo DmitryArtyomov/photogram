@@ -5,10 +5,10 @@
       h2.card-header
         = 'Edit album'
       .card-block
-        = simple_form_for(@album, url: user_album_path(@user, @album)) do |f|
-          = f.input :name, autofocus: true, required: true, label: 'Title'
-          = f.input :description
-          = f.input :tags, as: :select, input_html: { class: 'tags-select', multiple: true, data: { tags: tags }},
-            collection: [], include_blank: false, include_hidden: false
-          .form-group.text-center
-            = f.button :submit, 'Update', class: 'btn btn-primary'
+        = render 'form', album: @album, path: user_album_path(@user, @album), btn_text: 'Update', tags: tags
+      - if can?(:destroy, @album)
+        .card-footer
+          .text-center
+            = button_to 'Delete', [@user, @album], method: :delete, class: 'btn btn-danger'
+      .card-footer
+        = link_to t('.back', default: 'Back'), :back

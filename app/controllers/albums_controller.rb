@@ -33,7 +33,14 @@ class AlbumsController < ApplicationController
     end
   end
 
-  def remove
+  def destroy
+    if @album.destroy
+      flash[:success] = "Album was successfully deleted"
+      redirect_to @user
+    else
+      flash[:alert] = "Error deleting album"
+      render "edit"
+    end
   end
 
   private
@@ -41,7 +48,6 @@ class AlbumsController < ApplicationController
   def album_params
     permitted_params = params.require(:album).permit(:name, :description, tags: [])
     permitted_params[:tags] = TagService.new(permitted_params[:tags]).tags
-    p permitted_params
     permitted_params
   end
 end
