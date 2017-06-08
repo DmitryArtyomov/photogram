@@ -5,3 +5,5 @@
 #= require turbolinks
 #= require select2
 #= require tags_selectors
+#= require photo_modal
+#= require tooltips

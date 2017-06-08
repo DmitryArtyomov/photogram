@@ -1,0 +1,38 @@
+.photo-wrapper
+  max-width: 600px
+  display: inline-block
+
+.photo-div
+  text-align: center
+
+.photo
+  max-height: 600px
+
+
+.photo-info
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  @extend .a-inherit
+
+
+.photo-profile-info
+  @include media-breakpoint-down(md)
+    margin-top: 1em
+
+  .photo-avatar-col
+    max-width: 100px
+
+
+.left-border
+  @include media-breakpoint-up(lg)
+    border-left: 1px solid rgba(0, 0, 0, 0.1)
+
+.action-buttons
+  @extend .mb-2, .d-flex
+  justify-content: space-between
+
+.photo-data-col-nonmodal
+  @include media-breakpoint-up(lg)
+    max-height: calc(100vh - 100px)
+    min-height: 600px

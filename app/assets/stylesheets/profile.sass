@@ -1,6 +1,5 @@
 .profile-block
-  a
-    color: inherit
+  @extend .a-inherit
 
 .profile-head
   .avatar-col
@@ -29,18 +28,3 @@
         margin-bottom: 1em
     .follow-block
       @extend .pb-2
-
-.tags-block
-  @extend .mt-2
-  .tag
-    @extend .mr-1, .badge, .badge-primary
-    font-size: 100%
-    margin-bottom: 0.25em
-
-.album-preview
-  .collage-item-4
-    width: 50%
-    display: inline-block
-    padding: 1px
-  .collage-item-1
-    padding: 1px

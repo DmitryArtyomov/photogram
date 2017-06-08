@@ -1,11 +1,11 @@
-- tags = @album.tags.map { |tag| { id: tag.text, text: tag.text, selected: true }}
+- tags = @photo.tags.map { |tag| { id: tag.text, text: tag.text, selected: true }}
 .row
   .col-sm-6.offset-sm-3
     .card
       h2.card-header
         = 'Edit photo'
       .card-block
-        = render 'form', album: @album, path: user_album_path(@user, @album), btn_text: 'Update', tags: tags
+        = render 'form', photo: @photo, album: @album, path: [@user, @album, @photo], btn_text: 'Update', tags: tags
       - if can?(:destroy, @album)
         .card-footer
           .text-center

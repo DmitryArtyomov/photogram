@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
   end
 
   def show
+    render action: 'show', layout: false if request.xhr?
   end
 
   def edit
