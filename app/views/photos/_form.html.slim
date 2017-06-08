@@ -1,0 +1,10 @@
+- tags ||= []
+
+= simple_form_for(photo, url: path) do |f|
+  = f.input :description, autofocus: true
+  - if photo.new_record?
+    = f.input :image, required: true, input_html: { class: 'form-control' }
+  = f.input :tags, as: :select, input_html: { class: 'tags-select', multiple: true, data: { tags: tags, width: '100%' }},
+    collection: [], include_blank: false, include_hidden: false
+  .text-center
+    = f.button :submit, btn_text, class: 'btn btn-primary'

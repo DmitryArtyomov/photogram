@@ -1,0 +1,49 @@
+.row
+  .col-lg-8.flex-column.justify-center
+    .photo-div
+      .photo-wrapper
+        = image_tag(@photo.image.url, class: 'img-fluid photo')
+  .col-lg-4.left-border.flex-column(class = "#{'photo-data-col-nonmodal' unless request.xhr?}")
+    .row.photo-profile-info
+      .col-3.photo-avatar-col(class="#{'pr-0' if request.xhr?}")
+        = link_to @user
+          = image_tag(avatar(@user), class: 'img-fluid rounded-circle')
+      .col-9.photo-info
+          div = link_to @user do
+            b = "#{@user.first_name} #{@user.last_name}"
+          .text-muted = @photo.created_at.localtime.strftime("%d.%m.%Y %H:%M")
+    hr
+    .row
+      .col
+        - if can?(:edit, @photo)
+          .action-buttons
+            = link_to edit_user_album_photo_path(@user, @album, @photo), class: 'btn btn-secondary',
+              'data-toggle': 'tooltip', 'data-placement': 'right', title: "Edit" do
+              = fa_icon 'pencil', class: 'text-primary'
+            = link_to user_album_photo_path(@user, @album, @photo), method: :delete, class: 'btn btn-secondary',
+              'data-toggle': 'tooltip', 'data-placement': 'left', title: "Delete" do
+              = fa_icon 'trash', class: 'text-danger'
+        .break-word.text-muted = @photo.description
+        - if @photo.tags.any?
+          .tags-block
+            - @photo.tags.each do |tag|
+              = link_to('#') do
+                span.tag = tag.text
+        .a-inherit.mt-1 = link_to @album.name, [@user, @album]
+    hr
+      .comments-block
+        .comments
+          - 10.times do
+            .comment
+              .comment-info
+                b = link_to "#{@user.first_name} #{@user.last_name}", @user
+                small.text-muted = time_ago_in_words(@photo.created_at.localtime) + ' ago'
+
+              div = 'This is a comment placeholder'
+        .comment-form-block
+          = form_for :tag, url: '#', remote: true do |f|
+            .input-group
+              = f.text_field :text, class: "form-control", placeholder: "Type your comment here..."
+              span.input-group-btn
+                button.btn.btn-secondary type="submit"
+                  = fa_icon 'paper-plane'

@@ -1,0 +1,9 @@
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      h2.card-header
+        = 'Upload photo'
+      .card-block
+        = render 'form', photo: @photo, path: user_album_photos_path, btn_text: 'Upload'
+      .card-footer
+        = link_to t('.back', default: 'Back'), :back

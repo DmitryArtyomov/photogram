@@ -18,6 +18,11 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @photos = @album.photos.order(created_at: :desc)
+    if photo = session[:current_photo]
+      @current_photo = photo['id']
+      session.delete(:current_photo)
+    end
   end
 
   def edit

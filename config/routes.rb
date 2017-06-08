@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'tags/search', to: 'tags#search'
 
   resources :users, only: [:update, :edit, :show], path: '/' do
-    resources :albums
+    resources :albums do
+      resources :photos
+    end
   end
 
   root to: 'homepage#index'

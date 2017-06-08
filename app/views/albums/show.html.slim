@@ -15,7 +15,13 @@
           span.tag = tag.text
 
 .row
-  - 15.times do
+  - @photos.each do |photo|
     .col-6.col-md-4.col-lg-3
       .photo-preview.mb-4
-        = image_tag('http://via.placeholder.com/600x600', class: 'img-fluid rounded')
+        = link_to([@user, @album, photo], id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
+          = image_tag(photo.image.thumb.url, class: 'img-fluid rounded')
+
+#photo-modal.modal.fade aria-hidden="true" aria-labelledby="photo" role="dialog" tabindex="-1"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-body

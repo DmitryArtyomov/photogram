@@ -22,7 +22,9 @@
 class Album < ApplicationRecord
   belongs_to :user
 
-  validates :name, presence: true
-
   has_and_belongs_to_many :tags
+  has_many :photos, dependent: :destroy
+
+  validates :name, presence: true
+  validates :photos, length: { maximum: 50 }
 end
