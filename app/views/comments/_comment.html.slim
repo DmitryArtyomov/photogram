@@ -1,0 +1,11 @@
+- comment ||= @comment
+.comment(id = "#{comment.id}")
+  .comment-info
+    b = link_to "#{@user.first_name} #{@user.last_name}", comment.user
+    small.text-muted = time_ago_in_words(comment.created_at.localtime) + ' ago'
+
+  div
+    - if can?(:destroy, comment)
+      = link_to [@user, @album, @photo, comment], method: :delete, remote: true
+        = fa_icon 'times', class: 'float-right pr-2 pt-1 text-danger'
+    = comment.text

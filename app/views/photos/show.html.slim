@@ -33,17 +33,12 @@
     hr
       .comments-block
         .comments
-          - 10.times do
-            .comment
-              .comment-info
-                b = link_to "#{@user.first_name} #{@user.last_name}", @user
-                small.text-muted = time_ago_in_words(@photo.created_at.localtime) + ' ago'
-
-              div = 'This is a comment placeholder'
+            = render @comments
         .comment-form-block
-          = form_for :tag, url: '#', remote: true do |f|
+          = form_for :comment, url: user_album_photo_comments_path(@user, @album, @photo), remote: true do |f|
             .input-group
-              = f.text_field :text, class: "form-control", placeholder: "Type your comment here..."
+              = f.text_field :text, class: "form-control", placeholder: "Type your comment...",
+                required: true, maxlength: 140
               span.input-group-btn
                 button.btn.btn-secondary type="submit"
                   = fa_icon 'paper-plane'

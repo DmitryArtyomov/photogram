@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update, :edit, :show], path: '/' do
     resources :albums do
-      resources :photos
+      resources :photos do
+        resources :comments, only: [:create, :destroy]
+      end
     end
   end
 

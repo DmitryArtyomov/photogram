@@ -11,6 +11,9 @@ class Ability
       can [:destroy], Album, user_id: user.id, is_main: false
 
       can [:create, :update, :destroy], Photo, album: { user_id: user.id }
+
+      can [:create, :destroy], Comment, user_id: user.id
+      can [:destroy], Comment, photo: { album: { user_id: user.id }}
     end
 
     can [:read], User
