@@ -1,7 +1,7 @@
 - comment ||= @comment
 .comment(id = "#{comment.id}")
   .comment-info
-    b = link_to "#{@user.first_name} #{@user.last_name}", comment.user
+    b = link_to "#{comment.user.first_name} #{comment.user.last_name}", comment.user
     small.text-muted = time_ago_in_words(comment.created_at.localtime) + ' ago'
 
   div
