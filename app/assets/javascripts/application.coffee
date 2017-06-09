@@ -7,3 +7,4 @@
 #= require tags_selectors
 #= require photo_modal
 #= require tooltips
+#= require comments

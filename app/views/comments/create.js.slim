@@ -1,0 +1,15 @@
+| $("
+= j render @comment
+| ").appendTo(".comments");
+
+| $('#comment_text').val('');
+
+| $(".comments").animate({ scrollTop: $('.comments')[0].scrollHeight }, "slow");
+
+| $(".comment#
+= @comment.id
+|  a[data-method='delete']").click(function() {
+|   $(this).on('ajax:beforeSend', function() {
+|     $(this).hide();
+|   });
+| });
