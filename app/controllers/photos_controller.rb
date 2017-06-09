@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
     if @photo.save
       flash[:success] = "Photo was successfully uploaded"
       @album.touch
-      redirect_to user_album_path(@user, @album)
+      redirect_to [@user, @album]
     else
       flash[:alert] = "Error uploading photo"
       render "new"
@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
   def update
     if @photo.update_attributes(photo_params)
       flash[:success] = "Photo was successfully updated"
-      redirect_to user_album_path(@user, @album)
+      redirect_to [@user, @album, @photo]
     else
       flash[:alert] = "Error updating photo"
       render "edit"
@@ -40,7 +40,7 @@ class PhotosController < ApplicationController
   def destroy
     if @photo.destroy
       flash[:success] = "Photo was successfully deleted"
-      redirect_to user_album_path(@user, @album)
+      redirect_to [@user, @album]
     else
       flash[:alert] = "Error deleting photo"
       render "edit"

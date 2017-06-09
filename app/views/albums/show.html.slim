@@ -13,6 +13,9 @@
       - @album.tags.each do |tag|
         = link_to('#') do
           span.tag = tag.text
+    - if can? :create_nested_resource, @user
+      = link_to new_user_album_photo_path(@user, @album), class: 'btn btn-secondary mt-3'
+        | New photo
 
 .row
   - @photos.each do |photo|
