@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
-    @albums = @user.albums
+    @albums = @user.albums.order(updated_at: :desc)
   end
 
   def edit

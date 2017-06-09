@@ -3,6 +3,12 @@
 
   .profile-albums
     .row
+      - if can? :create_nested_resource, @user
+        .col-3
+          .card.mb-5 = link_to new_user_album_path(@user)
+            = image_tag('add', class: 'card-img-top img-fluid')
+            .card-footer.text-center
+              .card-text New album
       - @albums.each do |album|
         .col-3
           .card.mb-5 = link_to user_album_path(@user, album)
@@ -18,9 +24,3 @@
 
             .card-footer.text-center
               .card-text = album.name
-      - if can? :create_nested_resource, @user
-        .col-3
-          .card.mb-5 = link_to new_user_album_path(@user)
-            = image_tag('add', class: 'card-img-top img-fluid')
-            .card-footer.text-center
-              .card-text New album
