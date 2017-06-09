@@ -38,4 +38,11 @@ class User < ApplicationRecord
   has_many :albums
   has_many :photos, through: :albums
   has_many :comments
+
+
+  has_many :active_followerships,  class_name: 'Followership', foreign_key: 'follower_id'
+  has_many :passive_followerships, class_name: 'Followership', foreign_key: 'followed_id'
+
+  has_many :followers, through: :passive_followerships, source: :follower
+  has_many :following, through: :active_followerships,  source: :followed
 end

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @followership = @user.passive_followerships.find_by(follower_id: current_user.id)
     @albums = @user.albums.order(updated_at: :desc)
   end
 

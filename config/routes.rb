@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         resources :comments, only: [:create, :destroy]
       end
     end
+
+    resources :followerships, only: [:create, :destroy, :following, :followers]
   end
 
   root to: 'homepage#index'
