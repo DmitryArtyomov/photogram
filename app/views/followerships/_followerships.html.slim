@@ -1,0 +1,29 @@
+.row
+  .col-sm-10.offset-sm-1.col-lg-6.offset-lg-3
+    .card.mb-2
+      h4.text-center.a-inherit.card-header
+        = link_to @user.first_name, @user
+        = " #{text}"
+      .card-block
+        - if follow_users.empty?
+          h5.text-center No users
+        - else
+          - follow_users.each do |follow_user|
+            .row.followership-block.mb-2
+              .col-3.followership-avatar-col
+                = link_to follow_user
+                  = image_tag(avatar(follow_user), class: 'img-fluid rounded-circle')
+              .col-9.followership-info
+                div.spacer
+                  div.link-user
+                    = link_to follow_user do
+                      b = "#{follow_user.first_name} #{follow_user.last_name}"
+
+                  .follow-block
+                    - if user_signed_in? && current_user != follow_user
+                      - if followership = @current_followerships.detect{ |f| f.followed_id == follow_user.id }
+                        = button_to('Unfollow', user_followership_path(current_user, followership),
+                          method: :delete, class: 'btn btn-primary')
+                      - else
+                        = button_to('Follow', user_followerships_path(current_user),
+                          params: { followership: { followed_id: follow_user } }, class: 'btn btn-primary')

@@ -13,12 +13,12 @@
             b = @user.photos.size
             = ' photo'.pluralize(@user.photos.size)
           .col-3
-            = link_to('#') do
-              b 248
+            = link_to(followers_user_path(@user)) do
+              b = @user.followers.size
               |  followers
           .col-3
-            = link_to('#') do
-              b 228
+            = link_to(following_user_path(@user)) do
+              b = @user.following.size
               |  following
         .follow-block
           - if user_signed_in? && current_user != @user
