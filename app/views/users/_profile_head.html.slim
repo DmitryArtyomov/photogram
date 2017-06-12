@@ -15,7 +15,7 @@
           .col-3
             = link_to(followers_user_path(@user)) do
               b = @user.followers.size
-              |  followers
+              = ' follower'.pluralize(@user.followers.size)
           .col-3
             = link_to(following_user_path(@user)) do
               b = @user.following.size
