@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @followership = @user.passive_followerships.find_by(follower_id: current_user.id)
-    @albums = @user.albums.order(updated_at: :desc)
+    @albums = @user.albums.includes(:photos).order(updated_at: :desc)
   end
 
   def edit
