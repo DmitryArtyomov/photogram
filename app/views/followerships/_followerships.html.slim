@@ -21,7 +21,7 @@
 
                   .follow-block
                     - if user_signed_in? && current_user != follow_user
-                      - if followership = @current_followerships.detect{ |f| f.followed_id == follow_user.id }
+                      - if followership = @current_following.detect{ |f| f.followed_id == follow_user.id }
                         = button_to('Unfollow', user_followership_path(current_user, followership),
                           method: :delete, class: 'btn btn-primary')
                       - else

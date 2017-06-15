@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :load_current_user_followerships, only: [:followers, :following]
   load_and_authorize_resource
 
   def show
@@ -20,21 +19,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def followers
-    @followers = @user.followers
-  end
-
-  def following
-    @following = @user.following
-  end
-
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :address, :avatar)
-  end
-
-  def load_current_user_followerships
-    @current_followerships = current_user.active_followerships if user_signed_in?
   end
 end
