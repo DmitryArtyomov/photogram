@@ -5,11 +5,16 @@ Rails.application.routes.draw do
   get 'tags/search', to: 'tags#search'
 
   resources :users, only: [:update, :edit, :show], path: '/' do
+
     resources :albums do
       resources :photos do
         resources :comments, only: [:create, :destroy]
       end
     end
+
+    resources :followerships, only: [:create, :destroy]
+    resources :following, only: :index
+    resources :followers, only: :index
   end
 
   root to: 'homepage#index'

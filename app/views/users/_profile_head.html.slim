@@ -13,13 +13,18 @@
             b = @user.photos.size
             = ' photo'.pluralize(@user.photos.size)
           .col-3
-            = link_to('#') do
-              b 248
-              |  followers
+            = link_to(user_followers_path(@user)) do
+              b = @user.followers.size
+              = ' follower'.pluralize(@user.followers.size)
           .col-3
-            = link_to('#') do
-              b 228
+            = link_to(user_following_index_path(@user)) do
+              b = @user.following.size
               |  following
         .follow-block
-          - if user_signed_in?
-            = button_to('Follow', '#', method: :get, class: 'btn btn-primary')
+          - if user_signed_in? && current_user != @user
+            - if @followership
+              = button_to('Unfollow', user_followership_path(current_user, @followership),
+                method: :delete, class: 'btn btn-primary')
+            - else
+              = button_to('Follow', user_followerships_path(current_user),
+                params: { followership: { followed_id: @user } }, class: 'btn btn-primary')

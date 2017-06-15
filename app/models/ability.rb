@@ -14,10 +14,13 @@ class Ability
 
       can [:create, :destroy], Comment, user_id: user.id
       can [:destroy], Comment, photo: { album: { user_id: user.id }}
+
+      can [:create, :destroy], Followership, follower_id: user.id
     end
 
-    can [:read], User
+    can [:read, :followers, :following], User
     can [:read], Album
     can [:read], Photo
+    can [:read], Followership
   end
 end

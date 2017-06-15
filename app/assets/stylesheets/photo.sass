@@ -8,12 +8,9 @@
 .photo
   max-height: 600px
 
-
 .photo-info
-  display: flex
-  flex-direction: column
+  @extend .a-inherit, .flex-column
   justify-content: space-around
-  @extend .a-inherit
 
 
 .photo-profile-info
@@ -21,7 +18,10 @@
     margin-top: 1em
 
   .photo-avatar-col
-    max-width: 100px
+    text-align: right
+    img
+      width: 100%
+      max-width: 70px
 
 
 .left-border

@@ -18,6 +18,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @followership = @user.passive_followerships.find_by(follower_id: current_user.id)
     @photos = @album.photos.order(created_at: :desc)
     if photo = session[:current_photo]
       @current_photo = photo['id']

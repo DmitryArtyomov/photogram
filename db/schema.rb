@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608105258) do
+ActiveRecord::Schema.define(version: 20170612123121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20170608105258) do
     t.datetime "updated_at", null: false
     t.index ["photo_id"], name: "index_comments_on_photo_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "followerships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["followed_id"], name: "index_followerships_on_followed_id", using: :btree
+    t.index ["follower_id", "followed_id"], name: "index_followerships_on_follower_id_and_followed_id", unique: true, using: :btree
+    t.index ["follower_id"], name: "index_followerships_on_follower_id", using: :btree
   end
 
   create_table "photos", force: :cascade do |t|
@@ -88,7 +98,9 @@ ActiveRecord::Schema.define(version: 20170608105258) do
   end
 
   add_foreign_key "albums", "users", on_delete: :cascade
-  add_foreign_key "comments", "photos"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "photos", on_delete: :cascade
+  add_foreign_key "comments", "users", on_delete: :cascade
+  add_foreign_key "followerships", "users", column: "followed_id", on_delete: :cascade
+  add_foreign_key "followerships", "users", column: "follower_id", on_delete: :cascade
   add_foreign_key "photos", "albums", on_delete: :cascade
 end
