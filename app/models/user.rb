@@ -45,4 +45,6 @@ class User < ApplicationRecord
 
   has_many :followers, through: :passive_followerships, source: :follower
   has_many :following, through: :active_followerships,  source: :followed
+
+  has_many :feed_photos, through: :following, source: :photos
 end

@@ -1,0 +1,10 @@
+.row
+  .col-12.col-md-6.offset-md-3
+    .feed
+      - if @feed.empty?
+        h3.text-center No photos
+        h5.text-center.text-muted Try to follow more people
+      - else
+        = render @feed
+
+= render 'photos/modal'

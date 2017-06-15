@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
-    @followership = @user.passive_followerships.find_by(follower_id: current_user.id)
+    @followership = @user.passive_followerships.find_by(follower_id: current_user.id) if user_signed_in?
     @albums = @user.albums.includes(:photos).order(updated_at: :desc)
   end
 

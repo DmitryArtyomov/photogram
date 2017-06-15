@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'tags/search', to: 'tags#search'
 
+  resource :feed, only: [:show]
+
   resources :users, only: [:update, :edit, :show], path: '/' do
 
     resources :albums do
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
     resources :following, only: :index
     resources :followers, only: :index
   end
+
 
   root to: 'homepage#index'
 end

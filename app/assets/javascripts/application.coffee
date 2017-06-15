@@ -8,3 +8,5 @@
 #= require photo_modal
 #= require tooltips
 #= require comments
+#= require jquery.jscroll
+#= require feed
