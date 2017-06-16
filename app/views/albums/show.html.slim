@@ -24,7 +24,4 @@
         = link_to([@user, @album, photo], id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
           = image_tag(photo.image.thumb.url, class: 'img-fluid rounded')
 
-#photo-modal.modal.fade aria-hidden="true" aria-labelledby="photo" role="dialog" tabindex="-1"
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-body
+= render 'photos/modal'

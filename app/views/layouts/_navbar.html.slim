@@ -1,6 +1,7 @@
 nav.navbar.navbar-inverse.bg-primary.mb-4
   .container.d-flex
-    a.navbar-brand href="/"  PhotoGram
+    - path = user_signed_in? ? feed_path : "/"
+    a.navbar-brand href=(path)  PhotoGram
     ul.navbar-nav.ml-auto
       - if user_signed_in?
         li.nav-item.dropdown

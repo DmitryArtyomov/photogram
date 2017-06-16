@@ -1,0 +1,21 @@
+- photo ||= @photo
+- album = photo.album
+- user = album.user
+
+.feed-photo
+  .card-header
+    .flex-column
+      .row.photo-profile-info
+        .col-3.photo-avatar-col
+          = link_to user
+            = image_tag(avatar(user), class: 'img-fluid rounded-circle')
+        .col-9.photo-info
+            div = link_to user do
+              b = "#{user.first_name} #{user.last_name}"
+            .text-muted = time_ago_in_words(photo.created_at.localtime) + ' ago'
+  .card-block.p-0
+    = link_to([user, album, photo], id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
+      = image_tag photo.image.url, class: 'img-fluid'
+
+.d-none = link_to feed_path(last: photo.id), class: 'jscroll-next'
+  | Next

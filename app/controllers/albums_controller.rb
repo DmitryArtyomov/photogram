@@ -18,12 +18,8 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @followership = @user.passive_followerships.find_by(follower_id: current_user.id)
+    @followership = @user.passive_followerships.find_by(follower_id: current_user.id) if user_signed_in?
     @photos = @album.photos.order(created_at: :desc)
-    if photo = session[:current_photo]
-      @current_photo = photo['id']
-      session.delete(:current_photo)
-    end
   end
 
   def edit
