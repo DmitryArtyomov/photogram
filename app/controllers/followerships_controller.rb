@@ -7,6 +7,7 @@ class FollowershipsController < ApplicationController
     authorize! :create_nested_resource, @user
     if @followership.save
       flash[:success] = "You are now following #{@followership.followed.first_name}"
+      Notifications::NewFollower.new(@followership).notify
     else
       flash[:alert] = "Error creating followership"
     end

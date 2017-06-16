@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/DmitryArtyomov/iziToast-rails.git
+  revision: 87b7146932ce464c9015e07bf77b6a632ec7bd3f
+  specs:
+    izitoast (1.1.2.b)
+
+GIT
   remote: https://github.com/mperrando/devise-bootstrap-views.git
   revision: 7eb5a14fe4e4bf8ed79553a14e44d6562b3a3ab2
   branch: patch-1
@@ -286,6 +292,7 @@ DEPENDENCIES
   factory_girl_rails
   fog-aws
   font-awesome-rails
+  izitoast!
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

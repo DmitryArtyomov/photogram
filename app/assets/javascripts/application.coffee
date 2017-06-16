@@ -10,3 +10,5 @@
 #= require comments
 #= require jquery.jscroll
 #= require feed
+#= require cable
+#= require iziToast
