@@ -39,7 +39,7 @@ gem 'slim-rails'
 gem 'tether-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'devise'
-gem 'devise-bootstrap-views', :git => 'https://github.com/mperrando/devise-bootstrap-views.git', :branch => 'patch-1'
+gem 'devise-bootstrap-views', git: 'https://github.com/mperrando/devise-bootstrap-views.git', branch: 'patch-1'
 gem 'cancancan'
 gem 'fog-aws'
 gem 'carrierwave'
@@ -50,6 +50,7 @@ gem 'simple_form'
 gem 'pg_search'
 gem 'select2-rails'
 gem 'font-awesome-rails'
+gem 'izitoast', git: 'https://github.com/DmitryArtyomov/iziToast-rails.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

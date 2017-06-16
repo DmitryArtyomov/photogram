@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new
     if user.id
-      can [:update], User, id: user.id
+      can [:update, :create_nested_resource, :read_notifications], User, id: user.id
       can [:create_nested_resource], User, id: user.id
 
       can [:create, :update], Album, user_id: user.id

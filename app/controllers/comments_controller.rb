@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def create
     @comment.user = current_user
     if @comment.save
+      Notifications::NewComment.new(@comment).notify
       respond_to do |format|
         format.js
         format.html { redirect_to [@user, @album, @photo] }
