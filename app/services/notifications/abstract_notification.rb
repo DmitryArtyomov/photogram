@@ -10,6 +10,5 @@ class Notifications::AbstractNotification
     raise NotImplementedError
   end
 
-  protected
   attr_reader :to, :from
 end
