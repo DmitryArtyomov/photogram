@@ -17,6 +17,5 @@ class Notifications::NewComment < Notifications::AbstractNotification
     })
   end
 
-  private
   attr_reader :photo
 end
