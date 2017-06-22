@@ -28,6 +28,8 @@
 #
 
 class User < ApplicationRecord
+  include PgSearch
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable, :validatable
 
@@ -47,4 +49,6 @@ class User < ApplicationRecord
   has_many :following, through: :active_followerships,  source: :followed
 
   has_many :feed_photos, through: :following, source: :photos
+
+  pg_search_scope :search_by_full_name, against: [:first_name, :last_name], using: { tsearch: { prefix: true } }
 end

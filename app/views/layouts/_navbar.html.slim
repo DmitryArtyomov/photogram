@@ -1,7 +1,12 @@
 nav.navbar.navbar-inverse.bg-primary.mb-4
   .container.d-flex
-    - path = user_signed_in? ? feed_path : "/"
-    a.navbar-brand href=(path)  PhotoGram
+    a.navbar-brand href=(user_signed_in? ? feed_path : "/")  PhotoGram
+    = form_for :tag, url: '#', remote: true, class: 'form-inline' do |f|
+      .input-group
+        = f.text_field :text, class: "form-control", placeholder: "Search", required: true
+        span.input-group-btn
+          button.btn.btn-secondary type="submit"
+            = fa_icon 'search'
     ul.navbar-nav.ml-auto
       - if user_signed_in?
         li.nav-item.dropdown
