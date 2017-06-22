@@ -1,7 +1,28 @@
 .album-preview
+  font-size: 0
+
   .collage-item-4
-    width: 50%
     display: inline-block
-    padding: 1px
+    width: calc(50% - 2px)
+    padding: 0
+    padding-top: calc(50% - 2px)
+    margin: 1px
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+
+
+  .collage-item-2
+    @extend .collage-item-4
+    display: block
+    width: calc(100% - 2px)
+
+  .collage-item-3
+    @extend .collage-item-4
+
+    &:last-child
+      @extend .collage-item-2
+
   .collage-item-1
-    padding: 1px
+    @extend .collage-item-2
+    padding-top: 100%
