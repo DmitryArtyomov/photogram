@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @users = User.search_by_full_name(params[:q]).limit(10)
+    respond_to do |format|
+      format.json { render json: @users.map{ |u| "#{u.first_name} #{u.last_name}"}.to_json }
+    end
+  end
+
   private
 
   def user_params

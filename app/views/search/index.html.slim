@@ -1,0 +1,20 @@
+h2.text-center = "##{params[:tag]}"
+.search-results.mt-4
+  - if @albums && @albums.any?
+    h4.text-center.mt-4
+      | Albums
+      span.text-muted = " (#{@albums.size})"
+    .row.a-inherit.mt-3
+      = render collection: @albums, partial: 'albums/album_preview', as: :album, locals: { show_username: true }
+
+  - if @photos && @photos.any?
+    h4.text-center.mt-4
+      | Photos
+      span.text-muted = " (#{@photos.size})"
+    .row.mt-3
+      = render partial: 'photos/photo_preview', collection: @photos, as: :photo
+
+  - unless @albums && @albums.any? && @photos && @photos.any?
+    h4.text-center Nothing found
+
+= render 'photos/modal'

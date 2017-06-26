@@ -1,0 +1,16 @@
+- album ||= @album
+- user = album.user
+- show_username ||= false
+
+.col-3
+  .card.mb-5 = link_to user_album_path(user, album)
+    .album-preview
+      - photo_urls = album.photos.sample(4).map { |photo| photo.image.thumb.url }
+      - photo_urls.push(image_url 'nophoto.png') if photo_urls.empty?
+      - photo_urls.each do |url|
+        div class=("collage-item-#{photo_urls.size}") style=("background-image: url(#{url})")
+
+    .card-footer.text-center
+      .card-text = album.name
+      - if show_username
+        small.text-muted = "#{user.first_name} #{user.last_name}"

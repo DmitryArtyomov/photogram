@@ -18,7 +18,7 @@ class Ability
       can [:create, :destroy], Followership, follower_id: user.id
     end
 
-    can [:read], User
+    can [:read, :search], User
     can [:read], Album
     can [:read], Photo
     can [:read], Followership

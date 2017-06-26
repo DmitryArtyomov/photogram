@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', edit: 'settings'}
 
-  get 'tags/search', to: 'tags#search'
+  get '/search/:tag', to: 'search#index'
+  get '/search', to: 'search#search'
 
   resource :feed, only: [:show]
 

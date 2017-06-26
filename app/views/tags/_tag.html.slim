@@ -1,0 +1,4 @@
+- tag ||= @tag
+
+= link_to("/search/#{tag.text.sub('#', '')}") do
+  span.tag = tag.text
