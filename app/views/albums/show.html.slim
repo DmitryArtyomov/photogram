@@ -9,21 +9,16 @@
         = link_to edit_user_album_path(@user, @album) do
           = fa_icon 'pencil', class: 'pl-3'
     .text-muted = @album.description
-    .tags-block
-      - @album.tags.each do |tag|
-        = link_to('#') do
-          span.tag = tag.text
+    - if @album.tags.any?
+      .tags-block
+        = render @album.tags
     - if can? :create_nested_resource, @user
       = link_to new_user_album_photo_path(@user, @album), class: 'btn btn-secondary mt-3'
         | New photo
 
 - if @photos.any?
   .row
-    - @photos.each do |photo|
-      .col-6.col-md-4.col-lg-3
-        .photo-preview.mb-4
-          = link_to([@user, @album, photo], id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
-            = image_tag(photo.image.thumb.url, class: 'img-fluid rounded')
+    = render partial: 'photos/photo_preview', collection: @photos, as: :photo
 - else
   h5.mt-5.text-center Album is empty
 

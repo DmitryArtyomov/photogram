@@ -11,10 +11,10 @@ $(document).on 'turbolinks:load', ->
     placeholder: 'Enter your tags...'
     tokenSeparators: [',', ' ', '_']
     ajax:
-      url: '/tags/search'
+      url: '/search'
       delay: 250
       processResults: (data, params) ->
-        results: data.map (el) ->
+        results: data.tags.map (el) ->
           el['id'] = el.text
           el
       cache: true

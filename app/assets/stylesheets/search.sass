@@ -1,0 +1,23 @@
+.navbar
+  input.form-control
+    border-color: #ccc
+
+  .search-form
+    @extend .form-inline
+    width: 30%
+    @include media-breakpoint-only(xs)
+      width: 100%
+      margin-top: 15px
+    @include media-breakpoint-only(sm)
+      width: 65%
+    @include media-breakpoint-only(md)
+      width: 50%
+
+    .typeahead__container
+      width: 100%
+
+    .user
+      .name-col
+        @extend .pl-0
+        display: flex
+        align-items: center

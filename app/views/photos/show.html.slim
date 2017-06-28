@@ -26,9 +26,7 @@
         .break-word.text-muted = @photo.description
         - if @photo.tags.any?
           .tags-block
-            - @photo.tags.each do |tag|
-              = link_to('#') do
-                span.tag = tag.text
+            = render @photo.tags
         .a-inherit.mt-1 = link_to @album.name, [@user, @album]
     hr
       .comments-block

@@ -7,6 +7,7 @@ class Notifications::NewComment < Notifications::AbstractNotification
   end
 
   def notify
+    return if to == from
     NotificationsChannel.broadcast_to(to, {
       type: 'comment',
       data: {

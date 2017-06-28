@@ -12,3 +12,5 @@
 #= require feed
 #= require cable
 #= require iziToast
+#= require jquery.typeahead.min
+#= require search
