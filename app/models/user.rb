@@ -51,4 +51,8 @@ class User < ApplicationRecord
   has_many :feed_photos, through: :following, source: :photos
 
   pg_search_scope :search_by_full_name, against: [:first_name, :last_name], using: { tsearch: { prefix: true } }
+
+  def display_name
+    "#{first_name} #{last_name}"
+  end
 end

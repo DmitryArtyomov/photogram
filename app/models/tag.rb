@@ -22,4 +22,8 @@ class Tag < ApplicationRecord
 
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :photos
+
+  def display_name
+    text
+  end
 end

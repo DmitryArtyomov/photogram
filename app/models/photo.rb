@@ -26,4 +26,8 @@ class Photo < ApplicationRecord
   mount_uploader :image, PhotoUploader
 
   validates_presence_of :image
+
+  def display_name
+    "Photo ##{id}"
+  end
 end
