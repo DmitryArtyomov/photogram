@@ -1,7 +1,6 @@
 ActiveAdmin.register Comment do
+  permit_params :text
   includes :user, :photo
-
-  permit_params :user, :photo, :text
 
   index do
     selectable_column

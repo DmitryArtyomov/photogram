@@ -1,7 +1,6 @@
 ActiveAdmin.register Album do
+  permit_params :name, :description
   includes :user, :tags
-
-  permit_params :user, :name, :description
 
   index do
     selectable_column
@@ -28,7 +27,6 @@ ActiveAdmin.register Album do
 
   form do |f|
     f.inputs "Album Details" do
-      f.input :user
       f.input :name
       f.input :description, input_html: { rows: 5 }
     end

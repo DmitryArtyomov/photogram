@@ -1,4 +1,5 @@
 ActiveAdmin.register Photo do
+  permit_params :description, :tags
   actions :all, except: [:new, :create]
   includes :tags, album: :user
 
@@ -53,7 +54,6 @@ ActiveAdmin.register Photo do
   form do |f|
     f.inputs "Photo Details" do
       f.input :description, input_html: { rows: 5 }
-      f.input :album
       f.input :tags
     end
     f.actions

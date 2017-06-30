@@ -18,6 +18,7 @@
 #  last_name              :string           not null
 #  address                :string
 #  avatar                 :string
+#  role                   :string           default("user")
 #
 # Indexes
 #
