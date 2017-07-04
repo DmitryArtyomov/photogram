@@ -31,7 +31,7 @@
 class User < ApplicationRecord
   include PgSearch
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :confirmable, :validatable
 
   validates :first_name, :last_name, presence: true
