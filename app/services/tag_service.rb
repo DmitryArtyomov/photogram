@@ -8,7 +8,7 @@ class TagService
   end
 
   def tags
-    incoming_tags.select {|tag| tag =~ tag_format }.map { |tag| Tag.find_or_create_by(text: tag) }
+    incoming_tags.uniq.select { |tag| tag =~ tag_format }.map { |tag| Tag.find_or_create_by(text: tag) }
   end
 
   private

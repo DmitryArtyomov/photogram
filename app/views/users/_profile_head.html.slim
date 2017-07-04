@@ -5,6 +5,7 @@
           = image_tag(avatar(@user), class: "avatar img-fluid")
       .col-sm-8.profile-info
         h3.profile-name = link_to("#{@user.first_name} #{@user.last_name}", @user)
+        .text-muted = @user.address
         .row.profile-counters
           .col-3
             b = @user.albums.size
