@@ -1,6 +1,7 @@
 class Notifications::NewComment < Notifications::AbstractNotification
 
   def initialize(comment)
+    @comment = comment
     @to = comment.photo.album.user
     @from = comment.user
     @photo = comment.photo
@@ -16,7 +17,8 @@ class Notifications::NewComment < Notifications::AbstractNotification
         url: user_album_photo_path(to, photo.album, photo)
       }
     })
+    NotificationsMailer.comment_notification(comment).deliver_later
   end
 
-  attr_reader :photo
+  attr_reader :photo, :comment
 end

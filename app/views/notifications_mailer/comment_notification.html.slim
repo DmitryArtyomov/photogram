@@ -1,0 +1,16 @@
+h3 = "Hello, #{@to.first_name}. You have a new comment!"
+p
+  = link_to("#{@commenter.first_name} #{@commenter.last_name}", @commenter)
+  |  has left a comment on your 
+  = link_to('photo', [@comment.photo.album.user, @comment.photo.album, @comment.photo])
+  | .
+p
+  | If the above links are not working for you, use this links instead: 
+  br
+  = "#{@commenter.first_name} #{@commenter.last_name}"
+  |  - 
+  = link_to(url_for(@commenter), @commenter)
+  br
+  | Photo - 
+  = link_to( url_for([@comment.photo.album.user, @comment.photo.album, @comment.photo]),
+    [@comment.photo.album.user, @comment.photo.album, @comment.photo] )

@@ -3,7 +3,12 @@ class MyLogger
     @app = app
   end
 
-  def call(env)
+  def call env
+    dup._call env
+  end
+
+  private
+  def _call(env)
     request_started_on = Time.now
     @status, @headers, @response = @app.call(env)
     request_ended_on = Time.now
@@ -12,8 +17,6 @@ class MyLogger
 
     [@status, @headers, @response]
   end
-
-  private
 
   def write_to_log(text)
     log_text = "[#{Time.now.strftime('%F %T')}]: #{text}\n"
