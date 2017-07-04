@@ -3,7 +3,11 @@ class MyLogger
     @app = app
   end
 
-  def call(env)
+  def call env
+    dup._call env
+  end
+
+  def _call(env)
     request_started_on = Time.now
     @status, @headers, @response = @app.call(env)
     request_ended_on = Time.now

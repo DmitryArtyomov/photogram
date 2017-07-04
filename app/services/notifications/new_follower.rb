@@ -1,6 +1,7 @@
 class Notifications::NewFollower < Notifications::AbstractNotification
 
   def initialize(followership)
+    @followership = followership
     @to = followership.followed
     @from = followership.follower
   end
@@ -14,5 +15,8 @@ class Notifications::NewFollower < Notifications::AbstractNotification
         url: user_path(from)
       }
     })
+    NotificationsMailer.follower_notification(followership).deliver_later
   end
+
+  attr_reader :followership
 end
