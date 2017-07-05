@@ -7,6 +7,25 @@ $(document).on 'turbolinks:load', ->
     order: 'desc'
     emptyTemplate: "Nothing found for <strong>{{query}}</strong>"
     source:
+      'Albums':
+        ajax:
+          url: '/search'
+          data:
+            q: '{{query}}'
+          path: 'albums'
+        display: 'name'
+        href: '/{{user.id}}/albums/{{id}}'
+        template: (query, album) ->
+          """
+          <div class="row">
+            <div class="col-12 vertical-center">
+              <div>{{name}}</div>
+              <div class='text-muted'>Owner: {{user.first_name}} {{user.last_name}}</div>
+              <div class='text-muted'>Photos: #{album.photos_count}</div>
+            </div>
+          </div>
+          """
+
       'Tags':
         ajax:
           url: '/search'
@@ -16,6 +35,7 @@ $(document).on 'turbolinks:load', ->
         display: 'text'
         href: (tag) ->
           "/search/#{tag.text.replace('#', '')}"
+
       'Users':
         ajax:
           url: '/search'
@@ -32,12 +52,13 @@ $(document).on 'turbolinks:load', ->
 
         display: ['full_name', 'reverse_full_name']
         template: """
-        <div class="row user">
+        <div class="row">
           <div class="col-3">
             <img class="rounded-circle img-fluid" src="{{avatar}}">
           </div>
-          <div class="col-9 name-col">
-            <span>{{full_name}}</span>
+          <div class="col-9 username">
+            <div>{{full_name}}</div>
+            <div class='text-muted'>Followers: {{followers}}</div>
           </div>
         </div>
         """
