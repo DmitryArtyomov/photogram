@@ -4,7 +4,6 @@ $(document).on 'turbolinks:load', ->
 
   $.typeahead
     input: '#search-query'
-    order: 'desc'
     emptyTemplate: "Nothing found for <strong>{{query}}</strong>"
     source:
       'Albums':
@@ -35,7 +34,15 @@ $(document).on 'turbolinks:load', ->
         display: 'text'
         href: (tag) ->
           "/search/#{tag.text.replace('#', '')}"
-
+        template: (query, tag) ->
+          """
+          <div class="row">
+            <div class="col-12 vertical-center">
+              <div>{{text}}</div>
+              <div class='text-muted'>Items: #{tag.items_count}</div>
+            </div>
+          </div>
+          """
       'Users':
         ajax:
           url: '/search'
@@ -51,17 +58,18 @@ $(document).on 'turbolinks:load', ->
               data
 
         display: ['full_name', 'reverse_full_name']
-        template: """
-        <div class="row">
-          <div class="col-3">
-            <img class="rounded-circle img-fluid" src="{{avatar}}">
+        template: (query, user) ->
+          """
+          <div class="row">
+            <div class="col-3">
+              <img class="rounded-circle img-fluid" src="{{avatar}}">
+            </div>
+            <div class="col-9 username">
+              <div>{{full_name}}</div>
+              <div class='text-muted'>Followers: #{user.followers}</div>
+            </div>
           </div>
-          <div class="col-9 username">
-            <div>{{full_name}}</div>
-            <div class='text-muted'>Followers: {{followers}}</div>
-          </div>
-        </div>
-        """
+          """
         href: '/{{id}}'
 
     dynamic: true

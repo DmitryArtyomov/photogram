@@ -15,12 +15,15 @@
 #
 # Foreign Keys
 #
-#  fk_rails_2593557582  (album_id => albums.id) ON DELETE => cascade
+#  fk_rails_...  (album_id => albums.id) ON DELETE => cascade
 #
 
 class Photo < ApplicationRecord
-  belongs_to :album
-  has_and_belongs_to_many :tags
+  belongs_to :album, counter_cache: true
+
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, dependent: :destroy
+
   has_many :comments
 
   mount_uploader :image, PhotoUploader

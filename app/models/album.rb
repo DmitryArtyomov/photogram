@@ -2,13 +2,14 @@
 #
 # Table name: albums
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  is_main     :boolean          default(FALSE)
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  name         :string
+#  description  :text
+#  is_main      :boolean          default(FALSE)
+#  user_id      :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  photos_count :integer          default(0)
 #
 # Indexes
 #
@@ -16,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_964016e0e8  (user_id => users.id) ON DELETE => cascade
+#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 
 class Album < ApplicationRecord
@@ -24,7 +25,9 @@ class Album < ApplicationRecord
 
   belongs_to :user
 
-  has_and_belongs_to_many :tags
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, dependent: :destroy
+
   has_many :photos, dependent: :destroy
 
   validates :name, presence: true

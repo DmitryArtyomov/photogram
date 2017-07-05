@@ -5,6 +5,14 @@ GIT
     izitoast (1.1.2.b)
 
 GIT
+  remote: https://github.com/deviantech/carrierwave-mimetype-fu.git
+  revision: 0ffe07cb6a6aff1e61d15811330a5e509cfd6fb0
+  specs:
+    carrierwave-mimetype-fu (0.1.0)
+      carrierwave
+      mimetype-fu
+
+GIT
   remote: https://github.com/mperrando/devise-bootstrap-views.git
   revision: 7eb5a14fe4e4bf8ed79553a14e44d6562b3a3ab2
   branch: patch-1
@@ -70,9 +78,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    annotate (2.7.1)
+    annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
-      rake (>= 10.4, < 12.0)
+      rake (>= 10.4, < 13.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (7.1.4)
@@ -97,9 +105,6 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     carrierwave-i18n (0.2.0)
-    carrierwave-mimetype-fu (0.0.2)
-      carrierwave
-      mimetype-fu
     case_transform (0.2)
       activesupport
     coderay (1.1.1)
@@ -357,7 +362,7 @@ DEPENDENCIES
   cancancan
   carrierwave
   carrierwave-i18n
-  carrierwave-mimetype-fu
+  carrierwave-mimetype-fu!
   coffee-rails (~> 4.2)
   devise
   devise-async
