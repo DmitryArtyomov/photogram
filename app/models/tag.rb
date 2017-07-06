@@ -2,10 +2,11 @@
 #
 # Table name: tags
 #
-#  id         :integer          not null, primary key
-#  text       :string(20)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  text           :string(20)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  taggings_count :integer          default(0)
 #
 # Indexes
 #
@@ -20,8 +21,9 @@ class Tag < ApplicationRecord
 
   pg_search_scope :search_by_text, against: :text, using: { tsearch: { prefix: true} }
 
-  has_and_belongs_to_many :albums
-  has_and_belongs_to_many :photos
+  has_many :taggings
+  has_many :albums, through: :taggings, source: :taggable, source_type: 'Album'
+  has_many :photos, through: :taggings, source: :taggable, source_type: 'Photo'
 
   def display_name
     text

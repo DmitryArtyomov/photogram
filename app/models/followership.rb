@@ -16,13 +16,13 @@
 #
 # Foreign Keys
 #
-#  fk_rails_8f3ccce67f  (followed_id => users.id) ON DELETE => cascade
-#  fk_rails_fb53670bec  (follower_id => users.id) ON DELETE => cascade
+#  fk_rails_...  (followed_id => users.id) ON DELETE => cascade
+#  fk_rails_...  (follower_id => users.id) ON DELETE => cascade
 #
 
 class Followership < ApplicationRecord
   belongs_to :follower, class_name: 'User'
-  belongs_to :followed, class_name: 'User'
+  belongs_to :followed, class_name: 'User', counter_cache: :followers_count
 
   validate :cannot_follow_self
   validates :follower_id, uniqueness: { scope: :followed_id }

@@ -4,10 +4,12 @@ Rails.application.routes.draw do
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', edit: 'settings'}
   ActiveAdmin.routes(self)
 
-  get '/search/:tag', to: 'search#index'
   get '/search', to: 'search#search'
 
   resource :feed, only: [:show]
+  resources :tags, only: [:show] do
+    get 'fetch', on: :collection
+  end
 
   resources :users, only: [:update, :edit, :show], path: '/' do
 

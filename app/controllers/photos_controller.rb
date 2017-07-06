@@ -9,6 +9,7 @@ class PhotosController < ApplicationController
   end
 
   def create
+    @photo.tags = TagService.new(params[:photo][:tags]).tags
     if @photo.save
       flash[:success] = "Photo was successfully uploaded"
       @album.touch
@@ -28,6 +29,7 @@ class PhotosController < ApplicationController
   end
 
   def update
+    @photo.tags = TagService.new(params[:photo][:tags]).tags
     if @photo.update_attributes(photo_params)
       flash[:success] = "Photo was successfully updated"
       redirect_to [@user, @album, @photo]
@@ -50,8 +52,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    permitted_params = params.require(:photo).permit(:description, :image, tags: [])
-    permitted_params[:tags] = TagService.new(permitted_params[:tags]).tags
-    permitted_params
+    params.require(:photo).permit(:description, :image)
   end
 end

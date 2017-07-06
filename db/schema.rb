@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629130710) do
+ActiveRecord::Schema.define(version: 20170705154400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,18 +32,12 @@ ActiveRecord::Schema.define(version: 20170629130710) do
   create_table "albums", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "is_main",     default: false
+    t.boolean  "is_main",      default: false
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "photos_count", default: 0
     t.index ["user_id"], name: "index_albums_on_user_id", using: :btree
-  end
-
-  create_table "albums_tags", id: false, force: :cascade do |t|
-    t.integer "album_id", null: false
-    t.integer "tag_id",   null: false
-    t.index ["album_id", "tag_id"], name: "index_albums_tags_on_album_id_and_tag_id", unique: true, using: :btree
-    t.index ["tag_id", "album_id"], name: "index_albums_tags_on_tag_id_and_album_id", unique: true, using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -75,17 +69,20 @@ ActiveRecord::Schema.define(version: 20170629130710) do
     t.index ["album_id"], name: "index_photos_on_album_id", using: :btree
   end
 
-  create_table "photos_tags", id: false, force: :cascade do |t|
-    t.integer "photo_id", null: false
-    t.integer "tag_id",   null: false
-    t.index ["photo_id", "tag_id"], name: "index_photos_tags_on_photo_id_and_tag_id", unique: true, using: :btree
-    t.index ["tag_id", "photo_id"], name: "index_photos_tags_on_tag_id_and_photo_id", unique: true, using: :btree
+  create_table "taggings", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.string  "taggable_type"
+    t.integer "taggable_id"
+    t.index ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", unique: true, using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id", using: :btree
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "text",       limit: 20
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "text",           limit: 20
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "taggings_count",            default: 0
     t.index ["text"], name: "index_tags_on_text", unique: true, using: :btree
   end
 
@@ -106,6 +103,7 @@ ActiveRecord::Schema.define(version: 20170629130710) do
     t.string   "address"
     t.string   "avatar"
     t.string   "role",                   default: "user"
+    t.integer  "followers_count",        default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name", using: :btree
@@ -118,4 +116,5 @@ ActiveRecord::Schema.define(version: 20170629130710) do
   add_foreign_key "followerships", "users", column: "followed_id", on_delete: :cascade
   add_foreign_key "followerships", "users", column: "follower_id", on_delete: :cascade
   add_foreign_key "photos", "albums", on_delete: :cascade
+  add_foreign_key "taggings", "tags", on_delete: :cascade
 end

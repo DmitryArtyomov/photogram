@@ -19,6 +19,7 @@
 #  address                :string
 #  avatar                 :string
 #  role                   :string           default("user")
+#  followers_count        :integer          default(0)
 #
 # Indexes
 #

@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_03de2dc08c  (user_id => users.id) ON DELETE => cascade
-#  fk_rails_8e6de2dbfc  (photo_id => photos.id) ON DELETE => cascade
+#  fk_rails_...  (photo_id => photos.id) ON DELETE => cascade
+#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 
 class Comment < ApplicationRecord

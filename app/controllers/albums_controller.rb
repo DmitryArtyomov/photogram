@@ -8,6 +8,7 @@ class AlbumsController < ApplicationController
   end
 
   def create
+    @album.tags = TagService.new(params[:album][:tags]).tags
     if @album.save
       flash[:success] = "Album was successfully created"
       redirect_to user_album_path(@user, @album)
@@ -26,6 +27,7 @@ class AlbumsController < ApplicationController
   end
 
   def update
+    @album.tags = TagService.new(params[:album][:tags]).tags
     if @album.update_attributes(album_params)
       flash[:success] = "Album was successfully updated"
       redirect_to user_album_path(@user, @album)
@@ -48,8 +50,6 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    permitted_params = params.require(:album).permit(:name, :description, tags: [])
-    permitted_params[:tags] = TagService.new(permitted_params[:tags]).tags
-    permitted_params
+    params.require(:album).permit(:name, :description)
   end
 end
