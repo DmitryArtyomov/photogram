@@ -22,8 +22,8 @@
 
 FactoryGirl.define do
   factory :album do
-    name "MyString"
-    description "MyText"
-    user nil
+    name { Faker::Book.title }
+    description { Faker::Beer.name }
+    user
   end
 end

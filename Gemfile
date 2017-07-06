@@ -40,7 +40,6 @@ gem 'tether-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'sidekiq'
 gem 'devise'
-gem 'devise-async'
 gem 'devise-bootstrap-views', git: 'https://github.com/mperrando/devise-bootstrap-views.git', branch: 'patch-1'
 gem 'cancancan'
 gem 'fog-aws'
@@ -63,6 +62,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.5'
+  gem 'faker'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 group :development do
