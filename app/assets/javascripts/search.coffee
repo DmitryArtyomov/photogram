@@ -33,7 +33,7 @@ $(document).on 'turbolinks:load', ->
           path: 'tags'
         display: 'text'
         href: (tag) ->
-          "/search/#{tag.text.replace('#', '')}"
+          "/tags/#{tag.text.replace('#', '')}"
         template: (query, tag) ->
           """
           <div class="row">
