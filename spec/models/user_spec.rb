@@ -34,27 +34,20 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject { build(:user) }
 
-  it "is valid with valid attributes" do
-    expect(subject).to be_valid
+  context 'attribute validators' do
+    include_examples 'empty attribute validation', empty_attribute: nil,          validity: true
+    include_examples 'empty attribute validation', empty_attribute: :avatar,      validity: true
+    include_examples 'empty attribute validation', empty_attribute: :first_name,  validity: false
+    include_examples 'empty attribute validation', empty_attribute: :last_name,   validity: false
+    include_examples 'empty attribute validation', empty_attribute: :email,       validity: false
+    include_examples 'empty attribute validation', empty_attribute: :password,    validity: false
   end
 
-  it "is not valid without first_name" do
-    subject.first_name = nil
-    expect(subject).to_not be_valid
-  end
-
-  it "is not valid without last_name" do
-    subject.last_name = nil
-    expect(subject).to_not be_valid
-  end
-
-  it "is not valid without email" do
-    subject.email = nil
-    expect(subject).to_not be_valid
-  end
-
-  it "is not valid without password" do
-    subject.password = nil
-    expect(subject).to_not be_valid
+  context 'instance methods' do
+    context '#display_name' do
+      it 'should return first_name and last_name joined by space' do
+        expect(subject.display_name).to eq "#{subject.first_name} #{subject.last_name}"
+      end
+    end
   end
 end

@@ -20,8 +20,8 @@
 
 FactoryGirl.define do
   factory :photo do
-    description "MyText"
-    image "MyString"
-    album nil
+    description { Faker::Lorem.sentence }
+    image       { File.open(File.join(Rails.root, '/spec/fixtures/photo.jpg')) }
+    association :album, strategy: :build
   end
 end

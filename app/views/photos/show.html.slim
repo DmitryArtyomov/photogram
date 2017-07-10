@@ -32,11 +32,12 @@
       .comments-block
         .comments
             = render @comments
-        .comment-form-block
-          = form_for :comment, url: user_album_photo_comments_path(@user, @album, @photo), remote: true do |f|
-            .input-group
-              = f.text_field :text, class: "form-control", placeholder: "Type your comment...",
-                required: true, maxlength: 140
-              span.input-group-btn
-                button.btn.btn-secondary type="submit"
-                  = fa_icon 'paper-plane'
+        - if can?(:create, Comment)
+          .comment-form-block
+            = form_for :comment, url: user_album_photo_comments_path(@user, @album, @photo), remote: true do |f|
+              .input-group
+                = f.text_field :text, class: "form-control", placeholder: "Type your comment...",
+                  required: true, maxlength: 140
+                span.input-group-btn
+                  button.btn.btn-secondary type="submit"
+                    = fa_icon 'paper-plane'

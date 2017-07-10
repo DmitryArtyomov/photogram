@@ -28,6 +28,7 @@
 #  index_users_on_last_name_and_first_name  (last_name,first_name)
 #  index_users_on_reset_password_token      (reset_password_token) UNIQUE
 #
+require 'open-uri'
 
 FactoryGirl.define do
   factory :user do
@@ -35,5 +36,7 @@ FactoryGirl.define do
     last_name  { Faker::Name.last_name }
     email      { Faker::Internet.email }
     password   { Faker::Internet.password }
+    address    { Faker::Address.city }
+    avatar     { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
   end
 end

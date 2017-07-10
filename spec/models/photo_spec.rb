@@ -21,5 +21,21 @@
 require 'rails_helper'
 
 RSpec.describe Photo, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  context 'attribute validators' do
+    subject { build(:photo) }
+    include_examples 'empty attribute validation', empty_attribute: nil,          validity: true
+    include_examples 'empty attribute validation', empty_attribute: :description, validity: true
+    include_examples 'empty attribute validation', empty_attribute: :album,       validity: false
+    include_examples 'empty attribute validation', empty_attribute: :image,       validity: false
+  end
+
+  context 'instance methods' do
+    subject { create(:photo) }
+    context '#display_name' do
+      it 'should return "Photo #id"' do
+        expect(subject.display_name).to eq "Photo ##{subject.id}"
+      end
+    end
+  end
 end

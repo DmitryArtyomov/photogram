@@ -23,5 +23,19 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'attribute validators' do
+    subject { build(:comment) }
+
+    include_examples 'empty attribute validation', empty_attribute: nil,     validity: true
+    include_examples 'empty attribute validation', empty_attribute: :user,   validity: false
+    include_examples 'empty attribute validation', empty_attribute: :text,   validity: false
+    include_examples 'empty attribute validation', empty_attribute: :photo,  validity: false
+
+    context 'text' do
+      include_examples 'text length validation', length: 0,   validity: false
+      include_examples 'text length validation', length: 1,   validity: true
+      include_examples 'text length validation', length: 140, validity: true
+      include_examples 'text length validation', length: 141, validity: false
+    end
+  end
 end

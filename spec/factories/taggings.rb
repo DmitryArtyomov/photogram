@@ -19,7 +19,15 @@
 
 FactoryGirl.define do
   factory :tagging do
-    tag nil
+    tag
     taggable nil
+
+    factory :tagging_with_photo do
+      association :taggable, factory: :photo
+    end
+
+    factory :tagging_with_album do
+      association :taggable, factory: :album
+    end
   end
 end
