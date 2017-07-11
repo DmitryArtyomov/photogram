@@ -38,5 +38,15 @@ FactoryGirl.define do
     password   { Faker::Internet.password }
     address    { Faker::Address.city }
     avatar     { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
+
+    factory :user_following do
+      transient do
+        following_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        user.active_followerships = build_list(:followership, evaluator.following_count, follower: user)
+      end
+    end
   end
 end
