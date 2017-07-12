@@ -22,8 +22,12 @@
 
 FactoryGirl.define do
   factory :comment do
-    text "MyString"
-    user nil
-    photo nil
+    text { Faker::Lorem.sentence }
+    association :user, strategy: :build
+    association :photo, strategy: :build
+
+    factory :comment_by_photo_owner do
+      user { photo.album.user }
+    end
   end
 end

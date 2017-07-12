@@ -4,6 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new
     if user.persisted?
+      if user.role == 'admin'
+        can [:manage], :all
+      end
+
       can [:update, :create_nested_resource, :read_notifications], User, id: user.id
       can [:create_nested_resource], User, id: user.id
 
@@ -17,9 +21,7 @@ class Ability
 
       can [:create, :destroy], Followership, follower_id: user.id
 
-      if user.role == 'admin'
-        can [:manage], :all
-      end
+      cannot [:destroy], User
     end
 
     can [:read, :search], User

@@ -23,5 +23,29 @@
 require 'rails_helper'
 
 RSpec.describe Album, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  context 'attribute validators' do
+    subject { build(:album) }
+    include_examples 'empty attribute validation', empty_attribute: nil,          validity: true
+    include_examples 'empty attribute validation', empty_attribute: :description, validity: true
+    include_examples 'empty attribute validation', empty_attribute: :name,        validity: false
+    include_examples 'empty attribute validation', empty_attribute: :user,        validity: false
+  end
+
+  context 'associations validators' do
+    context 'photos' do
+      shared_examples 'photos count validation' do |photos_count:, validity:|
+        context "#{photos_count} photos" do
+          subject { build(:album_with_photos, photos_count: photos_count) }
+          it "is #{validity ? '' : 'not '}valid with #{photos_count} photos" do
+            expect(subject).send(validity ? "to" : "to_not", be_valid)
+          end
+        end
+      end
+
+      include_examples 'photos count validation', photos_count: 0,  validity: true
+      include_examples 'photos count validation', photos_count: 50, validity: true
+      include_examples 'photos count validation', photos_count: 51, validity: false
+    end
+  end
 end

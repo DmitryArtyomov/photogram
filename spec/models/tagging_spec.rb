@@ -20,5 +20,28 @@
 require 'rails_helper'
 
 RSpec.describe Tagging, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  shared_context 'attribute validations' do
+    include_examples 'empty attribute validation', empty_attribute: nil,       validity: true
+    include_examples 'empty attribute validation', empty_attribute: :tag,      validity: false
+    include_examples 'empty attribute validation', empty_attribute: :taggable, validity: false
+
+    it 'is not valid if such tagging already exists' do
+      subject.dup.save
+      expect(subject).to_not be_valid
+    end
+  end
+
+  context 'photo tags' do
+    include_context 'attribute validations' do
+      subject { build(:tagging_with_photo) }
+    end
+  end
+
+  context 'album tags' do
+    include_context 'attribute validations' do
+      subject { build(:tagging_with_album) }
+    end
+  end
+
 end

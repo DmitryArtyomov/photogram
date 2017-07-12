@@ -15,6 +15,6 @@
 
 FactoryGirl.define do
   factory :tag do
-    name "MyString"
+    text { "##{Faker::Lorem.word[0..19]}" }
   end
 end

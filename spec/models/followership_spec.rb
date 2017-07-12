@@ -23,5 +23,19 @@
 require 'rails_helper'
 
 RSpec.describe Followership, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { build(:followership) }
+
+  include_examples 'empty attribute validation', empty_attribute: nil,       validity: true
+  include_examples 'empty attribute validation', empty_attribute: :follower, validity: false
+  include_examples 'empty attribute validation', empty_attribute: :followed, validity: false
+
+  it 'is not valid when follower is equal to followed' do
+    subject.followed = subject.follower
+    expect(subject).to_not be_valid
+  end
+
+  it 'is not valid if such followership already exists' do
+    subject.dup.save
+    expect(subject).to_not be_valid
+  end
 end

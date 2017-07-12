@@ -22,8 +22,18 @@
 
 FactoryGirl.define do
   factory :album do
-    name "MyString"
-    description "MyText"
-    user nil
+    name { Faker::Book.title }
+    description { Faker::Beer.name }
+    association :user, strategy: :build
+
+    factory :album_with_photos do
+      transient do
+        photos_count 5
+      end
+
+      after(:build) do |album, evaluator|
+        album.photos = build_list(:photo, evaluator.photos_count, album: album)
+      end
+    end
   end
 end

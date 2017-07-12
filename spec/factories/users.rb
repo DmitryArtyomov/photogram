@@ -28,9 +28,35 @@
 #  index_users_on_last_name_and_first_name  (last_name,first_name)
 #  index_users_on_reset_password_token      (reset_password_token) UNIQUE
 #
+require 'open-uri'
 
 FactoryGirl.define do
   factory :user do
-    
+    first_name { Faker::Name.first_name }
+    last_name  { Faker::Name.last_name }
+    email      { Faker::Internet.email }
+    password   { Faker::Internet.password }
+    address    { Faker::Address.city }
+    avatar     { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
+
+    factory :user_following do
+      transient do
+        following_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        user.active_followerships = build_list(:followership, evaluator.following_count, follower: user)
+      end
+    end
+
+    factory :user_with_albums do
+      transient do
+        albums_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        user.albums = build_list(:album, evaluator.albums_count, user: user)
+      end
+    end
   end
 end

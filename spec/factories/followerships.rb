@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :followership do
-    follower nil
-    followed nil
+    association :follower, factory: :user
+    association :followed, factory: :user
   end
 end

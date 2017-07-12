@@ -8,4 +8,12 @@ CarrierWave.configure do |config|
   }
   config.fog_directory  = ENV['AWS_BUCKET']
   config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
+
+  if Rails.env.test?
+    Fog.mock!
+    Fog.credentials = config.fog_credentials;
+    connection = Fog::Storage.new(provider: 'AWS')
+    connection.directories.create(key: ENV['AWS_BUCKET'])
+    config.enable_processing = false
+  end
 end

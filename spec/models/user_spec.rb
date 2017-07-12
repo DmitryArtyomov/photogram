@@ -32,5 +32,22 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { build(:user) }
+
+  context 'attribute validators' do
+    include_examples 'empty attribute validation', empty_attribute: nil,          validity: true
+    include_examples 'empty attribute validation', empty_attribute: :avatar,      validity: true
+    include_examples 'empty attribute validation', empty_attribute: :first_name,  validity: false
+    include_examples 'empty attribute validation', empty_attribute: :last_name,   validity: false
+    include_examples 'empty attribute validation', empty_attribute: :email,       validity: false
+    include_examples 'empty attribute validation', empty_attribute: :password,    validity: false
+  end
+
+  context 'instance methods' do
+    context '#display_name' do
+      it 'should return first_name and last_name joined by space' do
+        expect(subject.display_name).to eq "#{subject.first_name} #{subject.last_name}"
+      end
+    end
+  end
 end
