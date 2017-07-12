@@ -1,3 +1,12 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", 'ability', '/channels/']
+  add_group "Models", "/models/"
+  add_group "Controllers", "/controllers/"
+  add_group "Services", "/services/"
+  add_group "Mailers", "/mailers/"
+  track_files "app/{controllers,models,services}/**/*.rb"
+end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -7,8 +16,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 
 require 'support/factory_girl'
-require 'support/empty_attribute_validation'
-require 'support/text_length_validation'
+Dir[Rails.root.join('spec/support/shared_examples/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/shared_contexts/*.rb')].each { |f| require f }
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

@@ -48,5 +48,15 @@ FactoryGirl.define do
         user.active_followerships = build_list(:followership, evaluator.following_count, follower: user)
       end
     end
+
+    factory :user_with_albums do
+      transient do
+        albums_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        user.albums = build_list(:album, evaluator.albums_count, user: user)
+      end
+    end
   end
 end

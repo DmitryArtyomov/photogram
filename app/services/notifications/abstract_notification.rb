@@ -2,7 +2,7 @@ class Notifications::AbstractNotification
   include ApplicationHelper
   include Rails.application.routes.url_helpers
 
-  def initialize
+  def initialize(*args)
     raise NotImplementedError
   end
 
