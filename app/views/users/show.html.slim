@@ -6,7 +6,7 @@
       - if can? :create_nested_resource, @user
         .col-3
           .card.mb-5 = link_to new_user_album_path(@user)
-            = image_tag(image_url('add'), class: 'card-img-top img-fluid')
+            = image_tag('add.png', class: 'card-img-top img-fluid')
             .card-footer.text-center
               .card-text New album
       = render collection: @albums, partial: 'albums/album_preview', as: :album
