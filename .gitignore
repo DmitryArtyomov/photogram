@@ -19,3 +19,4 @@
 
 /public/uploads/**
 coverage
+config/database.yml\nconfig/secrets.yml
