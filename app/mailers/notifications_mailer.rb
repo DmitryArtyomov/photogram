@@ -1,5 +1,5 @@
 class NotificationsMailer < ApplicationMailer
-  default from: 'notifications@photogram.net'
+  default from: "notifications@#{ENV['PRODUCTION_HOST'] || 'photogram.net'}"
 
   def follower_notification(followership)
     @follower = followership.follower
