@@ -6,4 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: ENV['REDIS_PROVIDER']
+  url: ENV['redis_provider']
