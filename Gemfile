@@ -76,6 +76,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
+  gem 'rack-dev-mark'
 end
 
 group :test do

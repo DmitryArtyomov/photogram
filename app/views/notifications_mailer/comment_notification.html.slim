@@ -14,3 +14,10 @@ p
   | Photo - 
   = link_to( url_for([@comment.photo.album.user, @comment.photo.album, @comment.photo]),
     [@comment.photo.album.user, @comment.photo.album, @comment.photo] )
+hr
+p
+  | You can disable such emails under your 
+  = link_to('profile settings', edit_user_url(@to))
+  br
+  | If the link above is not working for you, use this link:
+  = link_to(edit_user_url(@to), edit_user_url(@to))
