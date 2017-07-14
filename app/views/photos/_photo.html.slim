@@ -14,7 +14,7 @@
               b = "#{user.first_name} #{user.last_name}"
             .text-muted = time_ago_in_words(photo.created_at.localtime) + ' ago'
   .card-block.p-0
-    = link_to([user, album, photo], id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
+    = link_to([user, album, photo], class: "centered-link", id: photo.id, 'data-toggle': 'modal', 'data-target': '#photo-modal')
       = image_tag photo.image.url, class: 'img-fluid'
 
 .d-none = link_to feed_path(last: photo.id), class: 'jscroll-next'
