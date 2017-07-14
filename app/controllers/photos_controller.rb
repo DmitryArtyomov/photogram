@@ -9,8 +9,7 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo.tags = TagService.new(params[:photo][:tags]).tags
-    if @photo.save
+    if @photo.save && @photo.tags = TagService.new(params[:photo][:tags]).tags
       flash[:success] = "Photo was successfully uploaded"
       @album.touch
       redirect_to [@user, @album]

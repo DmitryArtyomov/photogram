@@ -8,8 +8,7 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    @album.tags = TagService.new(params[:album][:tags]).tags
-    if @album.save
+    if @album.save && @album.tags = TagService.new(params[:album][:tags]).tags
       flash[:success] = "Album was successfully created"
       redirect_to user_album_path(@user, @album)
     else

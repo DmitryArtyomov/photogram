@@ -22,7 +22,7 @@
               b = @user.following.size
               |  following
         .follow-block
-          - if can?(:create, Followership.new(followed_id: @user.id)) && current_user != @user
+          - if can?(:create, Followership.new(followed: @user, follower: current_user))
             - if @followership
               = button_to('Unfollow', user_followership_path(current_user, @followership),
                 method: :delete, class: 'btn btn-primary')

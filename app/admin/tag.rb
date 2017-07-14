@@ -12,7 +12,9 @@ ActiveAdmin.register Tag do
       link_to "Albums with #{tag.text}", admin_albums_path(q: { tags_id_eq: tag.id })
     end
     column :created_at
-    column :updated_at
     actions
   end
+
+  filter :text
+  filter :created_at
 end
