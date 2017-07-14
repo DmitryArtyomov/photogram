@@ -15,7 +15,7 @@ class Notifications::NewFollower < Notifications::AbstractNotification
         url: user_path(from)
       }
     })
-    NotificationsMailer.follower_notification(followership).deliver_later
+    NotificationsMailer.follower_notification(followership).deliver_later if @to.follower_email_notification?
   end
 
   attr_reader :followership

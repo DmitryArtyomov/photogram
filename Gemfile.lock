@@ -257,6 +257,8 @@ GEM
       pry (>= 0.10.4)
     puma (3.8.2)
     rack (2.0.3)
+    rack-dev-mark (0.7.6)
+      rack (>= 1.1, < 2.1)
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
@@ -416,6 +418,7 @@ DEPENDENCIES
   pg_search
   pry-rails
   puma (~> 3.0)
+  rack-dev-mark
   rails (~> 5.0.2)
   redis (~> 3.0)
   rspec-rails (~> 3.5)

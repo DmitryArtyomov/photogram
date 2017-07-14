@@ -5,3 +5,10 @@ p
 p
   | To visit his profile click the link above. If it is not working for you, use this link: 
   = link_to(url_for(@follower), @follower)
+hr
+p
+  | You can disable such emails under your 
+  = link_to('profile settings', edit_user_url(@to))
+  br
+  | If the link above is not working for you, use this link:
+  = link_to(edit_user_url(@to), edit_user_url(@to))
