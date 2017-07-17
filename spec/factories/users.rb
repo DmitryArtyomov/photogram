@@ -41,6 +41,7 @@ FactoryGirl.define do
     password   { Faker::Internet.password }
     address    { Faker::Address.city }
     avatar     { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
+    confirmed_at Date.today
 
     factory :user_following do
       transient do
