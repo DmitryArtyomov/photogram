@@ -27,5 +27,6 @@ class Ability
     can [:read], Album
     can [:read], Photo
     can [:read], Followership
+    can [:read], Comment
   end
 end

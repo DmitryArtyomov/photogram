@@ -1,6 +1,6 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", 'ability', '/channels/']
+  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/"]
   add_group "Models", "/models/"
   add_group "Controllers", "/controllers/"
   add_group "Services", "/services/"

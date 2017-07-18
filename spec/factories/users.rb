@@ -35,13 +35,14 @@ require 'open-uri'
 
 FactoryGirl.define do
   factory :user do
-    first_name { Faker::Name.first_name }
-    last_name  { Faker::Name.last_name }
-    email      { Faker::Internet.email }
-    password   { Faker::Internet.password }
-    address    { Faker::Address.city }
-    avatar     { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
-    confirmed_at Date.today
+    first_name    { Faker::Name.first_name }
+    last_name     { Faker::Name.last_name }
+    email         { Faker::Internet.email }
+    password      { Faker::Internet.password }
+    address       { Faker::Address.city }
+    avatar        { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
+    confirmed_at  Date.today
+    role          'user'
 
     factory :user_following do
       transient do
@@ -61,6 +62,10 @@ FactoryGirl.define do
       after(:create) do |user, evaluator|
         user.albums = build_list(:album, evaluator.albums_count, user: user)
       end
+    end
+
+    factory :admin do
+      role 'admin'
     end
   end
 end
