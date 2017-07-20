@@ -77,6 +77,7 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
   gem 'rack-dev-mark'
+  gem 'rails_real_favicon'
 end
 
 group :test do
