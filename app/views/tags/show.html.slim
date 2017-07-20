@@ -14,7 +14,8 @@ h2.text-center = "##{params[:id]}"
     .row.mt-3
       = render partial: 'photos/photo_preview', collection: @photos, as: :photo
 
-  - unless @albums && @albums.any? && @photos && @photos.any?
+  - unless (@albums && @albums.any?) || (@photos && @photos.any?)
     h4.text-center Nothing found
 
 = render 'photos/modal'
+- console
