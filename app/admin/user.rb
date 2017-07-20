@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :address, :first_name, :last_name
+  permit_params :email, :address, :first_name, :last_name, :role
   actions :all, except: [:new, :create, :destroy]
 
   index do
@@ -25,8 +25,25 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :email
       f.input :address
+      f.input :role, as: :select, collection: ['user', 'admin'], required: true, include_blank: false, include_hidden: false
     end
     f.actions
+  end
+
+  show do
+    attributes_table do
+      row :email
+      row :confirmed_at
+      row :unconfirmed_email
+      row :first_name
+      row :last_name
+      row :address
+      row :avatar
+      row :role
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
   end
 
 end

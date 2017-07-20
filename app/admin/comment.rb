@@ -1,6 +1,7 @@
 ActiveAdmin.register Comment do
   permit_params :text
   includes :user, :photo
+  actions :all, except: [:new, :create]
 
   index do
     selectable_column
