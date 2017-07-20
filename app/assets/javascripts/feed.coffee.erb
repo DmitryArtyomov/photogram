@@ -1,6 +1,6 @@
 $(document).on 'turbolinks:load', ->
 
   $('.feed').jscroll
-    loadingHtml: '<span>Loading...</span>'
+    loadingHtml: "<div class='text-center'><img src='<%= image_path('infinity.svg') %>'><div>"
     padding: 20
     nextSelector: 'a.jscroll-next:last'
