@@ -7,19 +7,23 @@
         h3.profile-name = link_to("#{@user.first_name} #{@user.last_name}", @user)
         .text-muted = @user.address
         .row.profile-counters
-          .col-3
+          .col-3.px-1
             b = @user.albums.size
+            br.hidden-lg-up
             = ' album'.pluralize(@user.albums.size)
-          .col-3
+          .col-3.px-1
             b = @user.photos.size
+            br.hidden-lg-up
             = ' photo'.pluralize(@user.photos.size)
-          .col-3
+          .col-3.px-1
             = link_to(user_followers_path(@user)) do
               b = @user.followers.size
+              br.hidden-lg-up
               = ' follower'.pluralize(@user.followers.size)
-          .col-3
+          .col-3.px-1
             = link_to(user_following_index_path(@user)) do
               b = @user.following.size
+              br.hidden-lg-up
               |  following
         .follow-block
           - if can?(:create, Followership.new(followed: @user, follower: current_user))

@@ -5,10 +5,10 @@
         = image_tag(@photo.image.url, class: 'img-fluid photo')
   .col-lg-4.left-border.flex-column(class = "#{'photo-data-col-nonmodal' unless request.xhr?}")
     .row.photo-profile-info
-      .col-3.photo-avatar-col(class="#{'pr-0' if request.xhr?}")
+      .col-auto.pl-3.photo-avatar-col(class="#{'pr-0' if request.xhr?}")
         = link_to @user
           = image_tag(avatar(@user), class: 'img-fluid rounded-circle')
-      .col-9.photo-info
+      .col.photo-info
           div = link_to @user do
             b = "#{@user.first_name} #{@user.last_name}"
           .text-muted = @photo.created_at.localtime.strftime("%d.%m.%Y %H:%M")

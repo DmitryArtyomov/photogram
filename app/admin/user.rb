@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :address
+  permit_params :email, :address, :first_name, :last_name
+  actions :all, except: [:new, :create, :destroy]
 
   index do
     selectable_column
@@ -24,8 +25,6 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :email
       f.input :address
-      f.input :password
-      f.input :password_confirmation
     end
     f.actions
   end
