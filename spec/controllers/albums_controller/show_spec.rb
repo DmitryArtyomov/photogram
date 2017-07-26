@@ -9,8 +9,7 @@ RSpec.describe AlbumsController, type: :controller do
     let(:user) { album.user }
     let(:request_exec) { get :show, params: { user_id: user.id, id: album.id } }
 
-    include_examples "assign_var", :user
-    include_examples "assign_var", :album
+    include_examples "assign_vars", :user, :album
 
     it "assigns @followership" do
       request_exec
@@ -28,5 +27,6 @@ RSpec.describe AlbumsController, type: :controller do
     end
 
     include_examples "does not require authentication"
+    include_examples 'cancancan_used'
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Notifications::NewFollower do
   subject { described_class.new(followership) }
 
-  context '#notify' do
+  describe '#notify' do
     let(:channel) { class_double("NotificationsChannel").as_stubbed_const }
     let(:mailer) { class_double("NotificationsMailer").as_stubbed_const }
     let(:recipient) { subject.followership.followed }

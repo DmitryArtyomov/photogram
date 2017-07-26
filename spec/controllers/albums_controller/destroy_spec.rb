@@ -10,8 +10,7 @@ RSpec.describe AlbumsController, type: :controller do
     let(:request_exec) { delete :destroy, params: { user_id: user.id, id: album.id } }
 
     context 'successful destroy' do
-      include_examples "assign_var", :user
-      include_examples "assign_var", :album
+      include_examples "assign_vars", :user, :album
 
       it "destroys the album" do
         expect{ request_exec }.to change{ Album.count }.by(-1)
@@ -28,8 +27,7 @@ RSpec.describe AlbumsController, type: :controller do
     context 'unsuccessful destroy' do
       before(:example) { allow_any_instance_of(Album).to receive(:destroy).and_return(false) }
 
-      include_examples "assign_var", :user
-      include_examples "assign_var", :album
+      include_examples "assign_vars", :user, :album
 
       it "doesn't destroy the album" do
         expect{ request_exec }.to_not change{ Album.count }
@@ -44,5 +42,6 @@ RSpec.describe AlbumsController, type: :controller do
     end
 
     include_examples "requires authentication"
+    include_examples 'cancancan_used'
   end
 end

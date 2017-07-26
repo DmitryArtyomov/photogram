@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Notifications::NewComment do
   subject { described_class.new(comment) }
 
-  context '#notify' do
+  describe '#notify' do
     let(:channel) { class_double("NotificationsChannel").as_stubbed_const }
     let(:mailer) { class_double("NotificationsMailer").as_stubbed_const }
     let(:recipient) { subject.comment.photo.album.user }

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Operations::Users::Confirm do
   subject { described_class.new(user) }
 
-  context '#execute' do
+  describe '#execute' do
     context 'user without albums' do
       let(:user) { create(:user) }
 

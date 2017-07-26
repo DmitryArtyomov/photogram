@@ -1,10 +1,3 @@
-shared_examples "assign_var" do |var|
-  it "assigns @#{var.to_s}" do
-    request_exec
-    expect(assigns(var)).to eq(send(var))
-  end
-end
-
 shared_examples "assigns album with attributes" do
   it "assigns @album" do
     request_exec

@@ -9,8 +9,7 @@ RSpec.describe AlbumsController, type: :controller do
     let(:album) { create(:album, user: user) }
     let(:request_exec) { get :edit, params: { user_id: user.id, id: album.id } }
 
-    include_examples "assign_var", :user
-    include_examples "assign_var", :album
+    include_examples "assign_vars", :user, :album
 
     it "renders 'edit' template" do
       request_exec
@@ -18,5 +17,6 @@ RSpec.describe AlbumsController, type: :controller do
     end
 
     include_examples "requires authentication"
+    include_examples 'cancancan_used'
   end
 end

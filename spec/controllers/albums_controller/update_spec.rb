@@ -16,7 +16,7 @@ RSpec.describe AlbumsController, type: :controller do
     let(:request_exec) { patch :update, params: { user_id: user.id, id: album.id, album: album_attributes } }
 
     context 'with valid params' do
-      include_examples "assign_var", :user
+      include_examples "assign_vars", :user
       include_examples "assigns album with attributes"
 
       it "saves @album" do
@@ -35,7 +35,7 @@ RSpec.describe AlbumsController, type: :controller do
 
     context 'with invalid params' do
       let(:album_attributes) { FactoryGirl.attributes_for(:album).tap { |attr| attr[:name] = '' } }
-      include_examples "assign_var", :user
+      include_examples "assign_vars", :user
       include_examples "assigns album with attributes"
 
       it "doesn't save @album" do
@@ -51,5 +51,6 @@ RSpec.describe AlbumsController, type: :controller do
     end
 
     include_examples "requires authentication"
+    include_examples 'cancancan_used'
   end
 end

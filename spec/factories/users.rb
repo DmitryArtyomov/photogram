@@ -54,6 +54,16 @@ FactoryGirl.define do
       end
     end
 
+    factory :user_followed do
+      transient do
+        followed_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        user.passive_followerships = build_list(:followership, evaluator.followed_count, followed: user)
+      end
+    end
+
     factory :user_with_albums do
       transient do
         albums_count 5
@@ -66,6 +76,10 @@ FactoryGirl.define do
 
     factory :admin do
       role 'admin'
+    end
+
+    factory :user_not_confirmed do
+      confirmed_at nil
     end
   end
 end

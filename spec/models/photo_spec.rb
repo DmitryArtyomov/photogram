@@ -32,7 +32,7 @@ RSpec.describe Photo, type: :model do
 
   context 'instance methods' do
     subject { create(:photo) }
-    context '#display_name' do
+    describe '#display_name' do
       it 'should return "Photo #id"' do
         expect(subject.display_name).to eq "Photo ##{subject.id}"
       end

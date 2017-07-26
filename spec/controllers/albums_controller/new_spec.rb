@@ -7,7 +7,7 @@ RSpec.describe AlbumsController, type: :controller do
   describe "GET #new" do
     let(:user) { current_user }
     let(:request_exec) { get :new, params: { user_id: user.id } }
-    include_examples "assign_var", :user
+    include_examples "assign_vars", :user
 
     it "assigns new @album" do
       request_exec
@@ -20,5 +20,6 @@ RSpec.describe AlbumsController, type: :controller do
     end
 
     include_examples "requires authentication"
+    include_examples 'cancancan_used'
   end
 end
