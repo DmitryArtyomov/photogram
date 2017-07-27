@@ -6,7 +6,7 @@ shared_examples "assigns album with attributes" do
   end
 end
 
-shared_examples "saves tags" do
+shared_examples "saves album tags" do
   it "saves @album tags" do
     request_exec
     expect(assigns(:album).tags.map { |t| t.text }).to eq(album_attributes['tags'])

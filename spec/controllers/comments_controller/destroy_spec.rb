@@ -18,7 +18,7 @@ RSpec.describe CommentsController, type: :controller do
     let!(:comment) { create(:comment, photo: photo, user: user) }
 
     context 'successful destroy' do
-      include_examples "assign_varss", :user, :album, :photo, :comment
+      include_examples "assign_vars", :user, :album, :photo, :comment
 
       it "destroys the comment" do
         expect{ request_exec }.to change{ Comment.count }.by(-1)
@@ -45,7 +45,7 @@ RSpec.describe CommentsController, type: :controller do
     context 'unsuccessful destroy' do
       before(:example) { allow_any_instance_of(Comment).to receive(:destroy).and_return(false) }
 
-      include_examples "assign_varss", :user, :album, :photo, :comment
+      include_examples "assign_vars", :user, :album, :photo, :comment
 
       it "doesn't destroy the comment" do
         expect{ request_exec }.to_not change{ Comment.count }

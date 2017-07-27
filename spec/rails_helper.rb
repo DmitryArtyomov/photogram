@@ -1,6 +1,6 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/"]
+  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/", "/serializers/"]
   add_group "Models", "/models/"
   add_group "Controllers", "/controllers/"
   add_group "Services", "/services/"
@@ -18,6 +18,13 @@ require 'rspec/rails'
 require 'support/factory_girl'
 
 require 'devise'
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

@@ -12,7 +12,7 @@ RSpec.describe CommentsController, type: :controller do
         comment: comment_attributes } }
     end
 
-    let(:cns) { class_double("Notifications::NewComment").as_stubbed_const }
+    let(:ncs) { class_double("Notifications::NewComment").as_stubbed_const }
 
     let(:user) { current_user }
     let(:album) { create(:album, user: user) }
@@ -20,7 +20,7 @@ RSpec.describe CommentsController, type: :controller do
     let(:comment_attributes) { FactoryGirl.attributes_for(:comment) }
 
     context 'with valid params' do
-      include_examples "assign_varss", :user, :album, :photo
+      include_examples "assign_vars", :user, :album, :photo
       include_examples "assigns comment with attributes"
 
       it "saves @comment" do
@@ -29,7 +29,7 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       it 'sends a notification using Notifications::NewComment service' do
-        expect(cns).to receive_message_chain(:new, :notify)
+        expect(ncs).to receive_message_chain(:new, :notify)
         request_exec
       end
 
@@ -52,7 +52,7 @@ RSpec.describe CommentsController, type: :controller do
 
     context 'with invalid params' do
       let(:comment_attributes) { FactoryGirl.attributes_for(:comment).tap { |attr| attr[:text] = '' } }
-      include_examples "assign_varss", :user, :album, :photo
+      include_examples "assign_vars", :user, :album, :photo
       include_examples "assigns comment with attributes"
 
       it "doesn't save @comment" do
@@ -61,10 +61,9 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       it "doesn't send a notification using Notifications::NewComment service" do
-        expect(cns).to_not receive(:new)
+        expect(ncs).to_not receive(:new)
         request_exec
       end
-
 
       context "default request" do
         it "redirects to photo page with an alert flash" do

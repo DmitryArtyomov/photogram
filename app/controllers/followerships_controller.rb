@@ -11,7 +11,7 @@ class FollowershipsController < ApplicationController
     else
       flash[:alert] = "Error creating followership"
     end
-    redirect_to :back
+    redirect_back(fallback_location: :root)
   end
 
   def destroy
@@ -20,7 +20,7 @@ class FollowershipsController < ApplicationController
     else
       flash[:alert] = "Error deleting followership"
     end
-    redirect_to :back
+    redirect_back(fallback_location: :root)
   end
 
   private

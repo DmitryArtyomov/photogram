@@ -24,7 +24,7 @@ RSpec.describe AlbumsController, type: :controller do
         expect(assigns(:album).changed?).to eq(false)
       end
 
-      include_examples "saves tags"
+      include_examples "saves album tags"
 
       it "redirects to show with a success flash" do
         request_exec

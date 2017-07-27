@@ -22,7 +22,7 @@ RSpec.describe AlbumsController, type: :controller do
         expect(assigns(:album)).to_not be_new_record
       end
 
-      include_examples "saves tags"
+      include_examples "saves album tags"
 
       it "redirects to show with a success flash" do
         request_exec
@@ -37,12 +37,12 @@ RSpec.describe AlbumsController, type: :controller do
       include_examples "assigns album with attributes"
 
       it "doesn't save @album" do
-        request_exec
+        expect{ request_exec }.to_not change{ Album.count }
         expect(assigns(:album)).to be_new_record
       end
 
       it "renders 'new' with an alert flash" do
-        expect{ request_exec }.to_not change{ Album.count }
+        request_exec
         expect(flash[:alert]).to_not eq(nil)
         expect(response).to render_template("new")
       end
