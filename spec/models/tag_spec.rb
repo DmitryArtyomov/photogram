@@ -51,7 +51,7 @@ RSpec.describe Tag, type: :model do
 
   context 'instance methods' do
     subject { create(:tag) }
-    context '#display_name' do
+    describe '#display_name' do
       it 'should return text' do
         expect(subject.display_name).to eq subject.text
       end

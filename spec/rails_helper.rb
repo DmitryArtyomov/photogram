@@ -1,11 +1,12 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", 'ability', '/channels/']
+  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/"]
   add_group "Models", "/models/"
   add_group "Controllers", "/controllers/"
   add_group "Services", "/services/"
   add_group "Mailers", "/mailers/"
-  track_files "app/{controllers,models,services}/**/*.rb"
+  add_group "Serializers", "/serializers/"
+  track_files "app/{controllers,models,services,serializers,mailers}/**/*.rb"
 end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
@@ -16,8 +17,15 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 
 require 'support/factory_girl'
-Dir[Rails.root.join('spec/support/shared_examples/*.rb')].each { |f| require f }
-Dir[Rails.root.join('spec/support/shared_contexts/*.rb')].each { |f| require f }
+
+require 'devise'
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -33,7 +41,7 @@ Dir[Rails.root.join('spec/support/shared_contexts/*.rb')].each { |f| require f }
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -65,6 +73,8 @@ RSpec.configure do |config|
     end
   end
 
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.extend ControllerMacros, type: :controller
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

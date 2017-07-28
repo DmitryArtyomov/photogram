@@ -7,9 +7,9 @@ class TagsController < ApplicationController
   end
 
   def fetch
-    tags = ActiveModelSerializers::SerializableResource.new( Tag.search_by_text(params[:q]).limit(20) )
+    @tags = ActiveModelSerializers::SerializableResource.new( Tag.search_by_text(params[:q]).limit(20) )
     respond_to do |format|
-      format.json { render json: tags.to_json }
+      format.json { render json: @tags.to_json }
     end
   end
 end

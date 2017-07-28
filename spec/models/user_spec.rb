@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'instance methods' do
-    context '#display_name' do
+    describe '#display_name' do
       it 'should return first_name and last_name joined by space' do
         expect(subject.display_name).to eq "#{subject.first_name} #{subject.last_name}"
       end

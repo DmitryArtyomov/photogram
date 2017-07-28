@@ -1,0 +1,11 @@
+aws_access_key_id: ""
+aws_secret_access_key: ""
+aws_bucket: ""
+gmail_login: "@gmail.com"
+gmail_pass: ""
+production:
+  redis_provider: "redis://127.0.0.1:6379"
+  production_host: "localhost"
+  production_ip: '127.0.0.1'
+development:
+  redis_provider: "redis://127.0.0.1:6379"

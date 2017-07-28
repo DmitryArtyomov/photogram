@@ -15,14 +15,8 @@ class UsersController < ApplicationController
       flash[:success] = "Profile succesfully updated"
       redirect_to @user
     else
+      flash[:alert] = "Error updating profile"
       render 'edit'
-    end
-  end
-
-  def search
-    @users = User.search_by_full_name(params[:q]).limit(10)
-    respond_to do |format|
-      format.json { render json: @users.map{ |u| "#{u.first_name} #{u.last_name}"}.to_json }
     end
   end
 

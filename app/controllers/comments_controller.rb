@@ -7,20 +7,30 @@ class CommentsController < ApplicationController
 
   def create
     @comment.user = current_user
-    if @comment.save
-      Notifications::NewComment.new(@comment).notify
-      respond_to do |format|
+    respond_to do |format|
+      if @comment.save
+        Notifications::NewComment.new(@comment).notify
         format.js
         format.html { redirect_to [@user, @album, @photo] }
+      else
+        format.html do
+          flash[:alert] = "Error creating comment"
+          redirect_to [@user, @album, @photo]
+        end
       end
     end
   end
 
   def destroy
-    if @comment.destroy
-      respond_to do |format|
+    respond_to do |format|
+      if @comment.destroy
         format.js
         format.html { redirect_to [@user, @album, @photo] }
+       else
+        format.html do
+          flash[:alert] = "Error deleting comment"
+          redirect_to [@user, @album, @photo]
+        end
       end
     end
   end
