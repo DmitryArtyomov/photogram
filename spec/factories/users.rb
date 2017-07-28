@@ -40,9 +40,11 @@ FactoryGirl.define do
     email         { Faker::Internet.email }
     password      { Faker::Internet.password }
     address       { Faker::Address.city }
-    avatar        { File.open(File.join(Rails.root, '/spec/fixtures/avatar.png')) }
+    avatar        { Rack::Test::UploadedFile.new(File.join(Rails.root, '/spec/fixtures/avatar.png'), 'image/png') }
     confirmed_at  Date.today
     role          'user'
+    follower_email_notification true
+    comment_email_notificaton   true
 
     factory :user_following do
       transient do
@@ -80,6 +82,11 @@ FactoryGirl.define do
 
     factory :user_not_confirmed do
       confirmed_at nil
+    end
+
+    factory :user_no_notifications do
+      follower_email_notification false
+      comment_email_notificaton   false
     end
   end
 end

@@ -21,7 +21,7 @@
 FactoryGirl.define do
   factory :photo do
     description { Faker::Lorem.sentence }
-    image     { Rack::Test::UploadedFile.new(File.join(Rails.root, '/spec/fixtures/photo.jpg'), 'image/jpg') }
+    image       { Rack::Test::UploadedFile.new(File.join(Rails.root, '/spec/fixtures/photo.jpg'), 'image/jpg') }
     association :album, strategy: :build
 
     factory :photo_with_comments do

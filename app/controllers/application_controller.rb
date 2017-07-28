@@ -6,17 +6,17 @@ class ApplicationController < ActionController::Base
     if request.referrer == new_user_session_url
       super
     else
-      stored_location_for(resource) || request.referrer || profile_path(resource)
+      stored_location_for(resource) || request.referrer || user_path(resource)
     end
   end
 
   def after_sign_out_path_for(resource_or_scope)
-    request.referrer
+    request.referrer || root_path
   end
 
   def access_denied(param)
     flash[:danger] = "You cannot access this page"
-    redirect_to :feed
+    redirect_to root_path
   end
 
   protected
