@@ -1,11 +1,12 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/", "/serializers/"]
+  add_filter ["/spec/", "/config/", "/admin/", "/middleware/", "/uploaders/", "/helpers/", "/channels/"]
   add_group "Models", "/models/"
   add_group "Controllers", "/controllers/"
   add_group "Services", "/services/"
   add_group "Mailers", "/mailers/"
-  track_files "app/{controllers,models,services}/**/*.rb"
+  add_group "Serializers", "/serializers/"
+  track_files "app/{controllers,models,services,serializers,mailers}/**/*.rb"
 end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
