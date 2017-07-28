@@ -1,32 +1,48 @@
-# Техническое задание:
+# Technical task:
 
-Проект представляет из себя простой аналог Instagram. В базовый функционал приложения входят следующие функции:
+The project is a simple analog of Instagram. The basic functionality of the application includes the following functions:
 
-- Регистрация пользователей в системе. Профиль пользователя.
-- Пользовательские альбомы. CRUD операции над альбомами и фотографиями
-- Теги
-- Подписки на других пользователей
-- Главная страница сайта - лента последних фото из подписок с возможностью сортировки по дате добавления, группировкой по тегам
-- Комментарии к фотографиям
-- Глобальный поиск по приложению - возможность поиска по названиям альбомов, тэгам к фотографиям (поиск через AJAX с предложенными вариантами слов)
-- Система авторизации (CanCanCan), роли и пермишены
-- Отправка письменных уведомлений на почту
-- Логирование на уровне middleware
-- Настройка скриптов для деплоя
-- Настройка nginx
-- Использование twitter-bootstrap для верстки страниц
-- Использование active-admin для админки
-- Покрытие тестами (rspec, rspec-its, shoulda-matchers, simplecov)
-- Настройка окружений для production, test, development
-- Использование Action Cable для пуш уведомлений
+- Registration of users in the system. User profile.
+- User albums. CRUD operations on albums and photos
+- Tags
+- Subscriptions to other users
+- The main page of the site - the feed of the latest photos from the subscriptions
+- Comments on photos
+- Global search across the application - the ability to search by album names, tags, users (search - through AJAX with suggested word variants)
+- Authorization system (CanCanCan), roles and - permissions
+- Sending email notifications
+- Logging at the middleware level
+- Configuring the scripts for deploy
+- Configuring nginx
+- Using twitter-bootstrap for page layout
+- Using active-admin for admin
+- Writing tests (rspec, rspec-it, - shoulda-matchers, simplecov)
+- Setting up environments for production, test, - development
+- Using Action Cable to Push Notifications
 
-Часть 1.
+## Part 1.
 
-- Проектирование, выделение сущностей предметной области. Выделение связей между сущностями в системе. Проектирование реляционной модели.
-- Описание (генерация) ключевых сущностей в системе в виде моделей и контроллеров.
+- Designing, highlighting the entities of the domain. Identify the relationships between entities in the system. Designing a relational model.
+- Description (generation) of key entities in the system in the form of models and controllers.
 
-Часть 2.
+## Part 2.
 
-- Создания модели пользователя. Модель включает в себя first name, last name, email, photo, address. Поля first name, last name, email  являются обязательными к заполнению.
-- Реализация альбомов. Каждый альбом имеет название, теги и небольшое описание. Имя альбома является обязательным к заполнению. Содержат фотографии пользователя в количестве не более 50 фото. Правами на редактирования альбома обладает только владелец, просмотр содержимого - все пользователи подписанные на владельца. На основной странице альбома все фотографии показаны сжатом виде.
-- Реализация модели фотографий. Фотографии содержат теги и небольшое описание и список комментариев. Возможностью редактирования фотографий обладает только их владелец, просмотр - пользователи подписанные на владельца. Оставлять комментарии разрешается только пользователям подписанным на владельца. Размерность фотографии не должна превышать больше 20мб.
+- Creating a user model. The model includes first name, last name, email, avatar, address. The first name, last name, email fields are required.
+- Realization of albums. Each album has a title, tags and a small description. The album name is required. Contains photos of the user in an amount not more than 50 photos. Only the owner has the rights to edit the album, viewing the content - all users. On the main album page all photos are shown in a condensed form.
+- Implementation of the model of photos. The photos contain tags, a short description and a list of comments. The ability to edit photos is owned only by their owner. The size of the photo should not exceed more than 20mb.
+- Tags. Used for albums and user photos. All tags must begin with a \# character and not exceed a limit of 20 characters. It is permissible to use only numbers and symbols of the alphabet.
+- Comments. Applied to photos, do not exceed the limit of 140 characters.
+
+## Part 3. Graphical interface
+
+Implementation through server-side rendering. You can use simple js libraries (jQuery). For styles, use Bootstrap or any wrappers above it
+
+## Part 4. Use cases
+### Homepage
+The main page of the site is a feed of the most recently added custom photos. Above each photo there is a user name (a link to his profile) with a photo and an album name (link to the album). By clicking on the photo it opens in full size in the pop-up window. In the right part of the screen there is a column with comments (user avatar, name, date of adding the comment itself). The comments are displayed in chronological order, at the bottom there is a comment entry box and a submit button.
+
+### Profile page
+The page displays all the public albums of the user. The sketch uses a collage of photos, under which there is a link to the album.
+
+### Album page
+The page displays thumbnails of the photos. By clicking on the photo, its full-sized representation opens with the same representation like on the main page.
