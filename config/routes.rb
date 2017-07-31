@@ -11,8 +11,7 @@ Rails.application.routes.draw do
     get 'fetch', on: :collection
   end
 
-  resources :users, only: [:update, :edit, :show], path: '/' do
-
+  resources :users, only: [:update, :edit, :show] do
     resources :albums do
       resources :photos do
         resources :comments, only: [:create, :destroy]

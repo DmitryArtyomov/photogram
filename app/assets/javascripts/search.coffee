@@ -13,7 +13,7 @@ $(document).on 'turbolinks:load', ->
             q: '{{query}}'
           path: 'albums'
         display: 'name'
-        href: '/{{user.id}}/albums/{{id}}'
+        href: '/users/{{user.id}}/albums/{{id}}'
         template: (query, album) ->
           """
           <div class="row">
@@ -70,7 +70,7 @@ $(document).on 'turbolinks:load', ->
             </div>
           </div>
           """
-        href: '/{{id}}'
+        href: '/users/{{id}}'
 
     dynamic: true
     group: true

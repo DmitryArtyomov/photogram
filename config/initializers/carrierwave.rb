@@ -4,7 +4,7 @@ CarrierWave.configure do |config|
     provider:              'AWS',
     aws_access_key_id:     ENV['aws_access_key_id'],
     aws_secret_access_key: ENV['aws_secret_access_key'],
-    region:                'eu-central-1'
+    region:                'us-east-2'
   }
   config.fog_directory  = ENV['aws_bucket']
   config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
