@@ -24,6 +24,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :address, :avatar, :follower_email_notification,
-      :comment_email_notificaton)
+      :comment_email_notificaton, :remove_avatar)
   end
 end

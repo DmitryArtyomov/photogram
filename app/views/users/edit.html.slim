@@ -5,7 +5,10 @@
         = 'Edit profile'
       .card-block
         = simple_form_for(@user, url: user_path, html: { method: :put }) do |f|
-          = f.input :avatar, input_html: { class: 'form-control' }
+          = f.input :avatar, input_html: { class: 'form-control' }, label: "New avatar"
+          - if @user.avatar?
+            = f.input :remove_avatar, as: :boolean, label: "Delete current avatar"
+          hr.full-width
           = f.input :first_name, autofocus: true, required: true
           = f.input :last_name, required: true
           = f.input :address
